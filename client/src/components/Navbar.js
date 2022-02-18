@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/users/authContext';
 
 
 const Navbar = () => {
+const { auth } = useContext(AuthContext);
+
     return ( 
-            
     <nav className="navbar navbar-expand-lg navbar-light">
     <div className="container-fluid">
       <a className="navbar-brand" href="/">اسم المنصة</a>
@@ -21,6 +23,14 @@ const Navbar = () => {
           <li className="nav-item">
             <a className="nav-link active" href="/login">تسجيل الدخول </a>
           </li>
+          { 
+          (auth.user) ?
+          <li className="nav-item">
+            <a className="nav-link active" href="/user-dashboard">فيديوهاتي</a>
+          </li>
+          :null   
+        }
+
         </ul>
         <form className="d-flex">
           <input className="form-control me-2" type="search" placeholder="ابحث عن المواد" aria-label="Search" />

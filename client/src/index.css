@@ -288,8 +288,24 @@ margin-right: 20px;
     background-color: rgb(221, 82, 18) !important;
     color: white !important;
 }
-
-
+/*admin dashboard */
+.Ddashbord{
+    margin-top: 120px;
+}
+.D-header{
+    height: 260px;
+}
+.botn{
+    margin-top: 8px;
+    width: fit-content;
+}
+/* .post{
+    background-color: rgb(207, 202, 194);
+    border-radius: 10px;
+}
+.order{
+    background-color: rgb(238, 167, 108);
+} */
 
 
 /*footer*/
