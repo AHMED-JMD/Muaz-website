@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 const AuthContextProvider = (props) =>{
     //define the context state
     const [auth, setAuth] = useState({
-        token: null,
+        token: localStorage.getItem('token'),
         user: null,
         isAuthenticated: false,
         isLoading: false
@@ -26,11 +26,11 @@ const AuthContextProvider = (props) =>{
     }
 
     const LoadUser = (user) =>{
-        setAuth({...auth, user, isAuthenticated:true});
+        setAuth({...auth, user, isAuthenticated:true, isLoading: false});
     }
 
     return(
-        <AuthContext.Provider value={{auth, SignINUser, SignOutUser,LoadUser} }>
+        <AuthContext.Provider value={{auth, setAuth,SignINUser, SignOutUser,LoadUser} }>
             {props.children}
         </AuthContext.Provider>
     )

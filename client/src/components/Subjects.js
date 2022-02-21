@@ -20,23 +20,8 @@ const Subjects = () =>{
     {/* <!--subject container--> */}
 <div className="cont-7">
   <div className="row">
-    <div className="col-lg-2 col-md-3 col-sm-12 form-cont">
-      <form className="sub-form">
-        <h3>تصنيف </h3>
-        <input type="radio" id="revise" name="video_type" value="all" />
-        <label htmlFor="revise"> الكل</label><br />
-        <input type="radio" id="revise" name="video_type" value="REVISE" />
-        <label htmlFor="revise">حصص مراجعة</label><br />
-        <input type="radio" id="css" name="video_type" value="FOCUS" />
-        <label htmlFor="focus">حصص تركيز</label><br />
-        <input type="radio" id="revise" name="video_type" value="science" />
-        <label htmlFor="revise">علمي</label><br />
-        <input type="radio" id="revise" name="video_type" value="art" />
-        <label htmlFor="revise"> أدبي</label><br />
-        <button className="btn8">ارسل</button>
-      </form>
-    </div>
-    <div className="col-lg-10 col-md-9 col-sm-12">
+
+    <div className="col-lg-12 col-md-12 col-sm-12">
 
       <div className="cont5">
         <h2 className="display-5 text-center sub-H1" > الرياضيات المتخصصة</h2>

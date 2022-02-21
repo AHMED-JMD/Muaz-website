@@ -32,24 +32,26 @@ return (
 <div className='admin'>   
 
 <Navbar />
-<div className="container-fluid D-header">
- <div className="text-center">
-    <h1 className="display-4 pt-3">مرحبا في لوحة التحكم</h1>
+<div className="container-fluid header">
+ <div className="text-center D-header">
+    <h1 className="display-4 pt-3 ">مرحبا مجددا في لوحة التحكم</h1>
+    <img src='./images/dashboard-icon.png' className='D-img' alt='logo' />
  </div>
 </div> 
-<div className='row Ddashbord'>
+<div className='row D-body'>
  <div className='col-lg-4 col-md-4 col-sm-12'>
+
+ <h1 className='text-center'>اضف فيديو جديد</h1>
 <form className='post' onSubmit={handleSubmit}>
-    <h1 className='text-center'>اضف فيديو جديد</h1>
     <div className='form-group'>
-    <label htmlFor='file'>الملف</label>
-    <input type="file" placeholder='اختر الملف' className='form-control' id='file'
+    <label htmlFor='file' className='label'>الملف</label>
+    <input type="file" placeholder='اختر الملف' className='form-control D-input' id='file'
     onChange={(e) => setFile(e.target.files[0])}
     />
     </div>
     <div className='form-group'>
-    <label htmlFor='file'>المادة</label>
-     <select className="form-select" aria-label="Default select example" dir='ltr'
+    <label htmlFor='file' className='label'>المادة</label>
+     <select className="form-select D-input" aria-label="Default select example" dir='ltr'
      value={subject}
      onChange={e => setSubject(e.target.value)}
      >
@@ -58,8 +60,8 @@ return (
      </select>    
     </div>
     <div className='form-group'>
-    <label htmlFor='file'>النوع</label>
-     <select className="form-select" aria-label="Default select example" dir='ltr'
+    <label htmlFor='file' className='label'>النوع</label>
+     <select className="form-select D-input" aria-label="Default select example" dir='ltr'
      value={kind}
      onChange={e => setKind(e.target.value)}
      >
@@ -69,8 +71,8 @@ return (
      </select>  
     </div>
     <div className='form-group'>
-    <label htmlFor='file' >الكتاب</label>
-    <select className="form-select" aria-label="Default select example" dir='ltr'
+    <label htmlFor='file' className='label'>الكتاب</label>
+    <select className="form-select D-input" aria-label="Default select example" dir='ltr'
      value={booknum}
      onChange={e => setBooknum(e.target.value)}
          >
@@ -80,28 +82,28 @@ return (
      </select> 
     </div>
     <div className='form-group'>
-    <label htmlFor='file'>اسم الباب</label>
-    <input type="text" placeholder=' ادخل الباب' className='form-control' 
+    <label htmlFor='file' className='label'>اسم الباب</label>
+    <input type="text" placeholder=' ادخل الباب' className='form-control D-input' 
     value={chapter}
     onChange={(e) => setChapter(e.target.value)}
     />
     </div>
     <div className='form-group'>
-    <label htmlFor='file'>اسم الدرس</label>
-    <input type="text" placeholder=' ادخل اسم الدرس' className='form-control'
+    <label htmlFor='file' className='label'>اسم الدرس</label>
+    <input type="text" placeholder=' ادخل اسم الدرس' className='form-control D-input'
     value={subName}
     onChange={(e) => setSubName(e.target.value) }
     />
     </div>
     <div className='form-group'>
-    <label htmlFor='file'>السعر</label>
-    <input type="text" placeholder='حدد السعر' className='form-control'
+    <label htmlFor='file' className='label'>السعر</label>
+    <input type="number" placeholder='حدد السعر' className='form-control D-input'
     value={price}
     onChange={(e) => setPrice(e.target.value)}
     />
     </div>
     <div className='butn'>
-    <button type='submit' className='botn'>ارسل</button>
+    <button type='submit' className='btn btn8 D-btn'>ارسل</button>
     </div>
 </form>
 
@@ -109,16 +111,23 @@ return (
  <div className='col-lg-8 col-md-7 col-sm-12 order'>
   <h1 className='display-5 text-center'>طلبات الفيديوهات</h1> 
   <ul class="list-group list-group-flush">
-  <li class="list-group-item">An item</li>
+  <li class="list-group-item l1">An item</li>
   <li class="list-group-item">A second item</li>
   <li class="list-group-item">A third item</li>
   <li class="list-group-item">A fourth item</li>
   <li class="list-group-item">And a fifth one</li>
+  <li class="list-group-item">A fourth item</li>
+  <li class="list-group-item ll">And the last one</li>
 </ul>  
  </div>
   
 
 </div>
+
+
+<footer>
+  حقوق الطبع محفوظة لصالح استاذ &copy;معاذ
+</footer>
 </div>    
 );
 }

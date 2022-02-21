@@ -12,7 +12,7 @@ const HomePage = () =>{
 
 {/* <!--header starts here-->     */}
 <header> 
-<div className="container-fluid cont1">
+<div className=" cont1">
 
    <div className="div1 row">
     <div className="col-md-7 col-sm-12">

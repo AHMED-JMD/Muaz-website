@@ -12,7 +12,7 @@ const validUser = (req, res, next) =>{
        let decoded = jwt.verify(token, process.env.JWTSECERET)
        req.user = decoded;
     } catch (error) {
-       return res.status(400).json({msg: 'token is not valid , loggin to get a valid on'}) 
+       return res.status(400).json({msg: 'token is not valid , loggin to get a valid on'})
     }
     next()
 }

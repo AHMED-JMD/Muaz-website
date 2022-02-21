@@ -20,7 +20,7 @@ const ErrContextProvider = (props) =>{
   }
 
   return(
-      <ErrContext.Provider value={{err, GetErrors, ClearErrors}}>
+      <ErrContext.Provider value={{err, setErr,GetErrors, ClearErrors}}>
           {props.children}
       </ErrContext.Provider>
   )

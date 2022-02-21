@@ -32,7 +32,7 @@ const SubjectsDetails = () =>{
    <div className="col-md-5 col-sm-12">
      <div className="detail-img">
         <video width="500" height="350" controls>
-         <source src="./videos/1.mp4" type="video/mp4" />
+         <source src="/v1/vedios/stream-vedio" type="video/mp4" />
         </video>
      </div>
    </div>

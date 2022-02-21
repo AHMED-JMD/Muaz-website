@@ -8,6 +8,14 @@ const xssFilter = require('xss-filters');
 router.post('/', (req, res) =>{
     let { name, username, password, role, confirmPas} = req.body;
 
+    //filter input
+  name = xssFilter.inHTMLData(name),
+  username = xssFilter.inHTMLData(username),
+  password = xssFilter.inHTMLData(password),
+  confirmPas = xssFilter.inHTMLData(confirmPas)
+console.log(password)
+
+//check req.body
  if(!name || !username || !password  || !confirmPas ){
      return res.status(400).json({msg: 'please enter all feilds'})
  };
@@ -16,12 +24,7 @@ router.post('/', (req, res) =>{
      return res.status(400).json({msg: 'password does not match'})
  }
 
- //filter input
-     name = xssFilter.inHTMLData(name),
-     username = xssFilter.inHTMLData(username),
-     password = xssFilter.inHTMLData(password),
-     confirmPas = xssFilter.inHTMLData(confirmPas)
-console.log(password)
+
 
 
  User.findOne({username})
@@ -29,7 +32,7 @@ console.log(password)
       if(user){
           return res.status(400).json({msg: 'User already exists'})
       }
-  }).catch(err => {if (err) throw err});
+  }).catch(err => {if (err) console.log(err)});
 
  const newUser = new User({name, username, password, role});
 
