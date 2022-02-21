@@ -12,51 +12,49 @@ import axios from 'axios';
 
 function App() {
 
-const { auth, setAuth } = useContext(AuthContext);
-const { err, setErr } = useContext(ErrContext);  
+const { auth, LoadUser, SignOutUser } = useContext(AuthContext);
+const { GetErrors } = useContext(ErrContext);  
 const token = auth.token;
 
 useEffect(() =>{
+
+try{
   //setting headers
   let config = {
     headers: {
         "content-type" : "application/json"
     }
-}
-try{
+  };
 //check token and add it to headers
 console.log(token);
 if(token){
-  config.headers['x-auth-token'] = token
+  config.headers['x-auth-token'] = token;
   }else{
-    console.log('no token , token == null')
+    console.log('no token , token == null');
   }
   //get request to db
   axios.get('/users/auth/get-user',config)
    .then(user =>{
     console.log(user);
-    setAuth({...auth, user, isAuthenticated:true, isLoading: false});
+    LoadUser(user);
    }) 
    .catch(er =>{
      console.log(er);
     // GetErrors
-    setErr({...err, msg: er.response.data, status: er.response.status, id: ''});
-
+    GetErrors(er.response.data, er.response.status)
     // SignOutUser
-    localStorage.removeItem('token');
-    setAuth({...auth,
-         user: null,
-         token: null,
-         isAuthenticated:false})
+    SignOutUser();
   })
 }catch(err) {
-if(err){ console.log(err) }
+if(err){ 
+  console.log(err);
+ }
 }
 
-} ,[token, auth, err, setAuth, setErr])
+}, [token, LoadUser, GetErrors, SignOutUser]);
 
 
-  return (
+  return(
  <div className='app'>   
  <AuthContextProvider>
  <ErrContextProvider>
@@ -78,7 +76,7 @@ if(err){ console.log(err) }
  </ErrContextProvider> 
  </AuthContextProvider>   
   </div>
-  );
+);
 }
 
 export default App;

@@ -202,6 +202,11 @@ font-size: 18px;
     background: linear-gradient(-30deg, rgb(230, 112, 16) 50%, rgb(226, 199, 108) 50%);
 
 }
+.alert{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .errMsg{
     padding: 7px;
     background-color: brown;

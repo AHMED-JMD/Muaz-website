@@ -43,8 +43,8 @@ axios.post('/users/auth', body, config)
              <h1 className="display-5 text-center">تسجيل الدخول </h1>
              {(err.id === 'login_err')? <div className='errMsg'>{err.msg.msg}</div>: null}
              {(auth.isAuthenticated) ? <div className='alert alert-success'>
-             <span> succesfully signed in </span> <br />
-                 <a className='btn btn-primary' href='/subjects'> go to subjects</a>
+             <span> تم تسجيل الدخول بنجاح </span> <br />
+                 <a className='btn btn8' href='/subjects'> تصفح المواد</a>
              </div> :null}
              <div className="form-group">
                  <label className="label">الاسم</label>

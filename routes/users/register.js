@@ -36,9 +36,9 @@ console.log(password)
 
  const newUser = new User({name, username, password, role});
 
- bcrypt.genSalt(15, (salt, err) =>{
-   bcrypt.hash(newUser.password, salt, (hash, err) =>{
-    if (err) throw err;
+ bcrypt.genSalt(10, (err, salt) =>{
+   bcrypt.hash(newUser.password, salt, (err, hash) =>{
+    if (err) console.log('cannot encrypt');
     newUser.password = hash;
 
     //save user

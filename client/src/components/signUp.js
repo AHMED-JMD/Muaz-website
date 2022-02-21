@@ -40,8 +40,8 @@ const body = JSON.stringify(newUser);
      <div className="box">
          <form action="" onSubmit={handleSubmit}>
          {(auth.isAuthenticated) ? <div className='alert alert-success'>
-                <span className='text-center'> تم تسجيل الدخول بنجاح </span> <br />
-                 <a className='btn btn-primary' href='/subjects'> تصفح المواد</a>
+                <span className='text-center'> تم تسجيل  بنجاح </span> <br />
+                 <a className='btn btn8' href='/login'> سجل الدخول</a>
              </div> :null}
 
              <h1 className="display-5 text-center"> تسجيل جديد </h1>
