@@ -110,14 +110,14 @@ return (
  </div>
  <div className='col-lg-8 col-md-7 col-sm-12 order'>
   <h1 className='display-5 text-center'>طلبات الفيديوهات</h1> 
-  <ul class="list-group list-group-flush">
-  <li class="list-group-item l1">An item</li>
-  <li class="list-group-item">A second item</li>
-  <li class="list-group-item">A third item</li>
-  <li class="list-group-item">A fourth item</li>
-  <li class="list-group-item">And a fifth one</li>
-  <li class="list-group-item">A fourth item</li>
-  <li class="list-group-item ll">And the last one</li>
+  <ul className="list-group list-group-flush">
+  <li className="list-group-item l1">An item</li>
+  <li className="list-group-item">A second item</li>
+  <li className="list-group-item">A third item</li>
+  <li className="list-group-item">A fourth item</li>
+  <li className="list-group-item">And a fifth one</li>
+  <li className="list-group-item">A fourth item</li>
+  <li className="list-group-item ll">And the last one</li>
 </ul>  
  </div>
   

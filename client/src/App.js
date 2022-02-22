@@ -12,9 +12,9 @@ import axios from 'axios';
 
 function App() {
 
-const { auth, LoadUser, SignOutUser } = useContext(AuthContext);
+const {   SignINUser, SignOutUser } = useContext(AuthContext);
 const { GetErrors } = useContext(ErrContext);  
-const token = auth.token;
+const token = localStorage.getItem('token');
 
 useEffect(() =>{
 
@@ -26,17 +26,17 @@ try{
     }
   };
 //check token and add it to headers
-console.log(token);
+
 if(token){
-  config.headers['x-auth-token'] = token;
-  }else{
-    console.log('no token , token == null');
+  config.headers["x-auth-token"] = token;
   }
+  console.log(config)
   //get request to db
   axios.get('/users/auth/get-user',config)
-   .then(user =>{
-    console.log(user);
-    LoadUser(user);
+   .then(res =>{
+    SignINUser(res.data)
+    console.log(res);
+    
    }) 
    .catch(er =>{
      console.log(er);
@@ -51,13 +51,14 @@ if(err){
  }
 }
 
-}, [token, LoadUser, GetErrors, SignOutUser]);
+}, [token]);
 
 
   return(
  <div className='app'>   
  <AuthContextProvider>
  <ErrContextProvider>
+
   <Routes> 
   
       <Route path="/" element={ <HomePage /> } />

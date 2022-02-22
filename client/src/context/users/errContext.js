@@ -16,7 +16,7 @@ const ErrContextProvider = (props) =>{
   }
 
   const ClearErrors = () =>{
-      setErr({...err, msg:null, status: null, id:''});
+      setErr({ msg:null, status: null, id:''});
   }
 
   return(

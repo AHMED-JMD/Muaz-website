@@ -14,23 +14,21 @@ const AuthContextProvider = (props) =>{
     //functions to modify state
     const SignINUser = (res) =>{
         localStorage.setItem('token', res.token);
-        setAuth({...auth, user: res.user, token: res.token, isAuthenticated:true});
+        setAuth({...auth, ...res, isAuthenticated:true});
     }
 
     const SignOutUser = () =>{
+        console.log('i work now');
         localStorage.removeItem('token');
         setAuth({...auth,
-             user: null,
+        user: null,
              token: null,
              isAuthenticated:false})
     }
 
-    const LoadUser = (user) =>{
-        setAuth({...auth, user, isAuthenticated:true, isLoading: false});
-    }
 
     return(
-        <AuthContext.Provider value={{auth, setAuth,SignINUser, SignOutUser,LoadUser} }>
+        <AuthContext.Provider value={{auth, setAuth,SignINUser, SignOutUser} }>
             {props.children}
         </AuthContext.Provider>
     )

@@ -57,6 +57,7 @@ password = xssFilter.inHTMLData(password)
 });
 
 router.get('/get-user',validUser, (req, res) =>{
+    console.log(req.user);
     User.findById(req.user.id)
      .select('-password')
      .then(user => res.json({user}))

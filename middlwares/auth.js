@@ -9,12 +9,14 @@ const validUser = (req, res, next) =>{
     }
 
     try {
-       let decoded = jwt.verify(token, process.env.JWTSECERET)
+        console.log(process.env.JWTSECRET)
+       let decoded = jwt.verify(token, process.env.JWTSECRET)
        req.user = decoded;
+       return next();
     } catch (error) {
        return res.status(400).json({msg: 'token is not valid , loggin to get a valid on'})
     }
-    next()
+   
 }
 
 module.exports = validUser;

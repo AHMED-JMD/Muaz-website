@@ -3,8 +3,7 @@ import { AuthContext } from '../context/users/authContext';
 
 
 const Navbar = () => {
-const { auth } = useContext(AuthContext);
-
+const { auth, SignOutUser } = useContext(AuthContext);
     return ( 
     <nav className="navbar navbar-expand-lg navbar-light">
     <div className="container-fluid">
@@ -20,15 +19,20 @@ const { auth } = useContext(AuthContext);
           <li className="nav-item">
             <a className="nav-link active" href="/subjects">تصفح المواد </a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link active" href="/login">تسجيل الدخول </a>
-          </li>
+          {(auth.isAuthenticated) ? <button className='btn btn8 nav-link' onClick={
+            () => { SignOutUser()}
+          }>تسجيل الخروج</button> :
+           <li className="nav-item">
+           <a className="nav-link active" href="/login">تسجيل الدخول </a>
+         </li>
+          }
+         
           { 
-          (auth.user) ?
+          (auth.isAuthenticated) &&
           <li className="nav-item">
             <a className="nav-link active" href="/user-dashboard">فيديوهاتي</a>
           </li>
-          :null   
+            
         }
 
         </ul>

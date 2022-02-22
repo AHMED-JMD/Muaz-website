@@ -49,7 +49,7 @@ const HomePage = () =>{
   <div className="col-lg-7 col-md-6 col-sm-12">
     <div className="aboutus-left ">
       <div className="about-text">
-        <h1 className="text-center display-5"> من <span class="cl-text">نحن؟ </span>  </h1><br />
+        <h1 className="text-center display-5"> من <span className="cl-text">نحن؟ </span>  </h1><br />
          <h3>
           <p><span className="bold">شركة جياد لخدمات السيارات المحدودة، </span>شركة رائدة تعمل في مجال خدمات صيانة السيارات وخدمات ما بعد البيع ، وهي امتداد لشركة جياد لصناعة السيارات - فخر الصناعة في السودان - تأسست في عام 2004 ويقع مقرها بمدينة الخرطوم جنوب غرب منطقة سباق الخيل كما أن لها وكلاء بمختلف المدن. </p>
           <p className="extra-info">تمتلك الشركة في مقرها الرئيس ورشاً متطورة لأعمال الصيانة الميكانيكية  وكهرباء السيارات  .</p>
@@ -70,12 +70,12 @@ const HomePage = () =>{
 
 {/* <!--categories section--> */}
 <div className="container cont3">
-  <h2 className="display-5 text-center"><span class="cl-text">اهم</span> ما نقدمه</h2>
+  <h2 className="display-5 text-center"><span className="cl-text">اهم</span> ما نقدمه</h2>
   <div className="row">
     <div className="col-md-4 col-sm-12">
       <div className="cat1">
       <div className="circle">
-        <span className="cat-img"><img class="img4" src="./images/logo2.png" alt="" /></span>
+        <span className="cat-img"><img className="img4" src="./images/logo2.png" alt="" /></span>
         <p className="cat-text">حل الامثلة و التمارين </p>
       </div>
       </div>
@@ -83,7 +83,7 @@ const HomePage = () =>{
     <div className="col-md-4 col-sm-12">
       <div className="cat2">
       <div className="circle">
-        <span className="cat-img"><img class="img4" src="./images/PicsArt_logo4-mod.png" alt="" /></span>
+        <span className="cat-img"><img className="img4" src="./images/PicsArt_logo4-mod.png" alt="" /></span>
         <p className="cat-text">شرح منهج الرياضيات العلمي </p>
       </div>
       </div>
@@ -91,7 +91,7 @@ const HomePage = () =>{
     <div className="col-md-4 col-sm-12">
       <div className="cat3">
       <div className="circle">
-        <span className="cat-img"><img class="img4" src="./images/PicsArt_logo3.png" alt="" /></span>
+        <span className="cat-img"><img className="img4" src="./images/PicsArt_logo3.png" alt="" /></span>
         <p className="cat-text">شرح منهج الرياضيات الادبي</p>
       </div>
       </div>
@@ -103,7 +103,7 @@ const HomePage = () =>{
 
 {/* <!--contact us section--> */}
 <div className="container cont4">
-  <h2 className="display-5 text-center ">  تواصل <span class="cl-text">معنا</span> </h2>
+  <h2 className="display-5 text-center ">  تواصل <span className="cl-text">معنا</span> </h2>
   <div className="wrapper">
   <div className="contact-section">
   <div className="contact">

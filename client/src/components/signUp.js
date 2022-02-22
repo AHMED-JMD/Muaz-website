@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const SignUp = () =>{
  const { auth, SignINUser, SignOutUser } = useContext(AuthContext);
- const { err, GetErrors } = useContext(ErrContext);
+ const { err, GetErrors, ClearErrors } = useContext(ErrContext);
 
     //state to manage form
 let[name, setName] = useState('');
@@ -27,6 +27,7 @@ const body = JSON.stringify(newUser);
  axios.post('/users/register', body, config)
   .then(res =>{
       SignINUser(res.data)
+      ClearErrors();
   }).catch(err =>{
       GetErrors(err.response.data, err.response.status, 'register_err');
       SignOutUser();
