@@ -1,6 +1,7 @@
 import React, {  useState, useContext } from 'react';
 import { AuthContext } from '../context/users/authContext';
 import { ErrContext } from '../context/users/errContext';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const SignUp = () =>{
@@ -42,7 +43,7 @@ const body = JSON.stringify(newUser);
          <form action="" onSubmit={handleSubmit}>
          {(auth.isAuthenticated) ? <div className='alert alert-success'>
                 <span className='text-center'> تم تسجيل  بنجاح </span> <br />
-                 <a className='btn btn8' href='/login'> سجل الدخول</a>
+                 <Link className='btn btn8' to='/login'> سجل الدخول</Link>
              </div> :null}
 
              <h1 className="display-5 text-center"> تسجيل جديد </h1>

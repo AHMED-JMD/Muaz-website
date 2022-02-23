@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Navbar from '../Navbar';
 import axios from 'axios';
+import { VideoContext } from '../../context/users/VideoContext';
 
 const AdminDashboard = () => {
+ const { AddVideo} = useContext(VideoContext);
+ 
+
     const [file, setFile] = useState('');
     const [subject, setSubject] = useState('');
     const [kind, setKind] = useState('');
@@ -23,9 +27,9 @@ const AdminDashboard = () => {
         data.append('file' ,file);
 
         //post data to server
-        axios.post('/v1/vedios', data)
+        axios.post('/v1/vedios/post-video', data)
         .then(res =>{
-            console.log(res);
+            AddVideo(res.data);
         }).catch(err => console.log(err))
     }
 return ( 
@@ -56,7 +60,7 @@ return (
      onChange={e => setSubject(e.target.value)}
      >
       <option value=" ">لا شئ</option>
-      <option value="math-3th">الرياضيات</option>
+      <option value="math-3th">رياضيات الصف الثالث</option>
      </select>    
     </div>
     <div className='form-group'>
@@ -68,6 +72,8 @@ return (
       <option value=" ">لا شئ</option>
       <option value="science">علمي</option>
       <option value="art">أدبي</option>
+      <option value="revision">حصص مراجعه</option>
+
      </select>  
     </div>
     <div className='form-group'>
@@ -77,8 +83,9 @@ return (
      onChange={e => setBooknum(e.target.value)}
          >
       <option value=" ">لا شئ</option>
-      <option value="first-book">الأول</option>
-      <option value="second-book">الثاني</option>
+      <option value="first-book"> العلمي الأول</option>
+      <option value="second-book">العلمي الثاني</option>
+      <option value="art-book"> الأدبي</option>
      </select> 
     </div>
     <div className='form-group'>

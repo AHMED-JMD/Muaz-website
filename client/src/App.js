@@ -1,10 +1,10 @@
 import React, {  useContext, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/homepage/HomePage';
-import Subjects from './components/Subjects';
+import Subjects from './components/subjects/Subjects';
 import Login from './components/login';
 import SignUp from './components/signUp';
-import SubjectsDetails from './components/subjects-details';
+import SubjectsDetails from './components/subjects/subjects-details';
 import AuthContextProvider, { AuthContext } from './context/users/authContext';
 import ErrContextProvider, { ErrContext } from './context/users/errContext';
 import AdminDashboard from './components/dashbord/adminDashbord';
@@ -12,13 +12,15 @@ import axios from 'axios';
 
 function App() {
 
-const {   SignINUser, SignOutUser } = useContext(AuthContext);
+const {  auth, LoadUser, SignOutUser } = useContext(AuthContext);
 const { GetErrors } = useContext(ErrContext);  
-const token = localStorage.getItem('token');
+const token = auth.token;
+
+console.log(auth);
 
 useEffect(() =>{
 
-try{
+  try{
   //setting headers
   let config = {
     headers: {
@@ -34,8 +36,7 @@ if(token){
   //get request to db
   axios.get('/users/auth/get-user',config)
    .then(res =>{
-    SignINUser(res.data)
-    console.log(res);
+    LoadUser(res.data.user);
     
    }) 
    .catch(er =>{
@@ -53,6 +54,7 @@ if(err){
 
 }, [token]);
 
+console.log(auth);
 
   return(
  <div className='app'>   

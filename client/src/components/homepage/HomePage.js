@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {Link} from 'react-router-dom';
+import { AuthContext } from '../../context/users/authContext';
 import Navbar from '../Navbar';
 // import  ScrollReveal from 'scrollreveal';
 
 
 
 const HomePage = () =>{
+  const { auth } = useContext(AuthContext);
+  console.log(auth);
+  
+
  return(
 <div className='homepage'>
 
@@ -20,8 +26,9 @@ const HomePage = () =>{
         <div className="header-text">
          <h1 className="display-5"> منصة <span className='h1-txt' >معاذ</span> لتعليم رياضيات الصف الثالث</h1>
          <h4 className='sub-header-txt'> الاولي من نوعها في السودان </h4>
-         <a className="btn btn1  " href="#aboutus"> ابدأ الان </a>
-         <a className="btn btn1-1 " href="./subjects"> تصفح المواد</a>
+         
+         <Link className="btn btn1  " to="#aboutus"> ابدأ الان </Link>
+         <Link className="btn btn1-1 " to="/subjects"> تصفح المواد</Link>
         </div>
         </div>
     </div>
@@ -35,7 +42,7 @@ const HomePage = () =>{
 
    
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-     <path fill="#fff" fill-opacity="1" d="M0,96L40,96C80,96,160,96,240,101.3C320,107,400,117,480,133.3C560,149,640,171,720,154.7C800,139,880,85,960,69.3C1040,53,1120,75,1200,74.7C1280,75,1360,53,1400,42.7L1440,32L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+     <path fill="#fff" fillOpacity="1" d="M0,96L40,96C80,96,160,96,240,101.3C320,107,400,117,480,133.3C560,149,640,171,720,154.7C800,139,880,85,960,69.3C1040,53,1120,75,1200,74.7C1280,75,1360,53,1400,42.7L1440,32L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
     </svg>
    
 </div>

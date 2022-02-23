@@ -7,8 +7,7 @@ import axios from "axios";
 const Login = () => {
   //context state
   const { auth, SignINUser, SignOutUser } = useContext(AuthContext);
-  const { err, GetErrors } = useContext(ErrContext);
-  console.log(auth);
+  const { err, GetErrors, ClearErrors } = useContext(ErrContext);
   //local state
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
@@ -29,7 +28,7 @@ const Login = () => {
       .post("/users/auth", body, config)
       .then((res) => {
         SignINUser(res.data);
-        GetErrors();
+        ClearErrors()
       })
       .catch((err) => {
         GetErrors(err.response.data, err.response.status, "login_err");

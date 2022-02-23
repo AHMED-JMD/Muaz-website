@@ -1,5 +1,6 @@
 import React from 'react';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
+import { Link } from "react-router-dom";
 
 
 const SubjectsDetails = () =>{
@@ -12,7 +13,7 @@ const SubjectsDetails = () =>{
 <div className="container-fluid cont6">
     <div className="text-center">
      <h1 className="display-3 ">تفاصيل المادة</h1>
-     <p ><a className='sub-H' href="/">الرئيسية</a> / <a className='sub-H' href="/subjects-details">التفاصيل</a></p>
+     <p ><Link className='sub-H' to="/">الرئيسية</Link> / <Link className='sub-H' to="/subjects-details">التفاصيل</Link></p>
     </div>
 </div>        
 
@@ -41,7 +42,7 @@ const SubjectsDetails = () =>{
 
 <div className="cont7">
   <p > <span>.ليس لديك حساب ؟ سجل لتتمكن من مشاهدة و شراء الفيديوهات</span>
-  <a  className="btn btn-lg btn8" href="/login"> تسجيل الدخول</a>
+  <Link className="btn btn-lg btn8" to="/login"> تسجيل الدخول</Link>
   </p>
 </div>
 

@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import ErrContextProvider from './context/users/errContext';
 import AuthContextProvider from './context/users/authContext';
+import VideoContextProvider from './context/users/VideoContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <AuthContextProvider>
     <ErrContextProvider>
+    <VideoContextProvider>  
      <App />
+    </VideoContextProvider> 
     </ErrContextProvider>
     </AuthContextProvider>
     </BrowserRouter>

@@ -18,11 +18,30 @@ const storage = multer.diskStorage({
     }
   })
   
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
+
+//public route
+//get vedios from db
+router.get('/', (req, res) =>{
+  let kind = req.header('kind');
+  let booknum = req.header('booknum');
+
+  if( !kind || !booknum){
+    return res.status(400).json({msg: 'please set headers'})
+  }
+
+  Vedios.find({kind, booknum})
+   .then(videos =>{
+     if(!videos){
+       console.log('couldnt fetch from db for some reasons')
+     }
+     res.json({videos});
+   }).catch(err => console.log(err));
+})
 
 //post rout get vedios from front 
 //private route
-router.post('/', upload.single('file'),  (req, res, next) =>{
+router.post('/post-video', upload.single('file'),  (req, res, next) =>{
     let { subject, kind, booknum, chapter, subName, price } = req.body;
     let { filename } = req.file;
 
@@ -40,7 +59,7 @@ price = xssFilter.inHTMLData(price);
      return res.status(400).json({msg: 'please enter all fields'});
  }
  //check if file is replicated
-  Vedios.findOne({link: filename})
+  Vedios.findOne({subName})
    .then(vedio =>{
      if(vedio){
        return res.status(400).json({msg: "file already exists"});
@@ -75,8 +94,8 @@ router.get('/stream-vedio', (req, res) =>{
   }
 
   // get video stats (about 61MB)
-  const videoPath = "file1.mp4";
-  const videoSize = fs.statSync("bigbuck.mp4").size;
+  const videoPath = path.join(__dirname, '../../../public/vedios/file-1645603876742-298826938.mp4');
+  const videoSize = fs.statSync(videoPath).size;
 
   // Parse Range
   // Example: "bytes=32324-"
