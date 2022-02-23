@@ -9,6 +9,7 @@ import AuthContextProvider, { AuthContext } from './context/users/authContext';
 import ErrContextProvider, { ErrContext } from './context/users/errContext';
 import AdminDashboard from './components/dashbord/adminDashbord';
 import axios from 'axios';
+import SubjectsName from './components/subjects/subject-name';
 
 function App() {
 
@@ -52,7 +53,7 @@ if(err){
  }
 }
 
-}, [token]);
+}, []);
 
 console.log(auth);
 
@@ -66,6 +67,8 @@ console.log(auth);
       <Route path="/" element={ <HomePage /> } />
    
       <Route path="/subjects" element={ <Subjects /> } />
+
+      <Route path="/subjects-name" element={<SubjectsName /> } />
 
       <Route path="/subjects-details" element={<SubjectsDetails />} />
   

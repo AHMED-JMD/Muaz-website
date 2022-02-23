@@ -60,7 +60,7 @@ return (
      onChange={e => setSubject(e.target.value)}
      >
       <option value=" ">لا شئ</option>
-      <option value="math-3th">رياضيات الصف الثالث</option>
+      <option value="رياضيات الصف الثالث" >رياضيات الصف الثالث</option>
      </select>    
     </div>
     <div className='form-group'>
@@ -70,9 +70,9 @@ return (
      onChange={e => setKind(e.target.value)}
      >
       <option value=" ">لا شئ</option>
-      <option value="science">علمي</option>
-      <option value="art">أدبي</option>
-      <option value="revision">حصص مراجعه</option>
+      <option value="علمي">علمي</option>
+      <option value="أدبي">أدبي</option>
+      <option value="حصص مراجعه">حصص مراجعه</option>
 
      </select>  
     </div>
@@ -83,9 +83,9 @@ return (
      onChange={e => setBooknum(e.target.value)}
          >
       <option value=" ">لا شئ</option>
-      <option value="first-book"> العلمي الأول</option>
-      <option value="second-book">العلمي الثاني</option>
-      <option value="art-book"> الأدبي</option>
+      <option value="الكتاب الأول"> العلمي الأول</option>
+      <option value="الكتاب الثاني">العلمي الثاني</option>
+      <option value="كتاب الأدبي"> الأدبي</option>
      </select> 
     </div>
     <div className='form-group'>

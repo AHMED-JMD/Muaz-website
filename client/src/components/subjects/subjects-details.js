@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar';
-import { Link } from "react-router-dom";
-
+import { Link, useSearchParams } from "react-router-dom";
+import axios from 'axios';
 
 const SubjectsDetails = () =>{
+  let [searchParams, setSearchParams] = useSearchParams()
+  let id = searchParams.get('id');
+
+  const [video, setVideo] = useState([])
+console.log(video.link)
+
+useEffect(() =>{
+  let config = {
+    headers:{
+      "Content-Type": "application/json"
+    }
+  }
+let body = { id }
+
+axios.post('/v1/vedios/get-byID', body, config)
+ .then(res =>{
+   setVideo(res.data.video)
+ }).catch(err => console.log(err))
+
+} ,[])
+
  return(
 <div className='subjectDetails'>
  
@@ -21,30 +42,20 @@ const SubjectsDetails = () =>{
 
 <div className="container cont5">
  <div className="row">
-   <div className="col-lg-7 col-md-5 col-sm-12">
-     <div className="detail-text">
-      <h1 className="diplay-5">التفاصيل</h1>
-      <p> </p>
-      <p>  الشركة في مقرها الرئيس ورشاً متطورة لأعمال الصيانة الميكانيكية  وكهرباء السيارت , الشركة في مقرها الرئيس ورشاً متطورة لأعمال الصيانة الميكانيكية  وكهرباء السيار</p>
-      <p> الشركة في مقرها الرئيس ورشاً متطورة لأعمال الصيانة الميكانيكية  وكهرباء السيارت,  الشركة في مقرها الرئيس ورشاً متطورة لأعمال الصيانة الميكانيكية  وكهرباء السيارت</p>
-      <p> الشركة في مقرها الرئيس ورشاً متطورة لأعمال الصيانة الميكانيكية  وكهرباء السيارت,  الشركة في مقرها الرئيس ورشاً متطورة لأعمال الصيانة الميكانيكية  وكهرباء السيارت</p> 
-    </div>
-  </div>
-   <div className="col-md-5 col-sm-12">
+   <div className="col-md-8 col-sm-12">
+{video.link? 
      <div className="detail-img">
-        <video width="500" height="350" controls>
-         <source src="/v1/vedios/stream-vedio" type="video/mp4" />
-        </video>
-     </div>
+     <video width="500" height="350" controls>
+      <source src={`/v1/vedios/stream-vedio?link=${video.link}`} type="video/mp4" />
+     </video>
+  </div>
+: <div className='alert alret-success'>انتظر قليلا </div>}
+
    </div>
  </div>
 </div>
 
-<div className="cont7">
-  <p > <span>.ليس لديك حساب ؟ سجل لتتمكن من مشاهدة و شراء الفيديوهات</span>
-  <Link className="btn btn-lg btn8" to="/login"> تسجيل الدخول</Link>
-  </p>
-</div>
+
 
  
 

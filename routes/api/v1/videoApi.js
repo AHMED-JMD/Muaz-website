@@ -22,22 +22,21 @@ const upload = multer({ storage: storage });
 
 //public route
 //get vedios from db
-router.get('/', (req, res) =>{
-  let kind = req.header('kind');
-  let booknum = req.header('booknum');
+router.post('/', (req, res) =>{
+  let {kind, chapter} = req.body;
 
-  if( !kind || !booknum){
+  if( !kind || !chapter){
     return res.status(400).json({msg: 'please set headers'})
   }
 
-  Vedios.find({kind, booknum})
+  Vedios.find({kind, chapter})
    .then(videos =>{
      if(!videos){
        console.log('couldnt fetch from db for some reasons')
      }
      res.json({videos});
    }).catch(err => console.log(err));
-})
+});
 
 //post rout get vedios from front 
 //private route
@@ -83,9 +82,30 @@ price = xssFilter.inHTMLData(price);
     }).catch(err => console.log('vedio_err', err)); 
 });
 
+//route for getting video by id
+//public route
+router.post('/get-byID', (req, res) =>{
+  const { id } = req.body;
+
+  if(!id){
+    return res.status(400).json({msg:'provide a valid id'})
+  }
+
+  Vedios.findById({_id: id})
+   .then(video =>{
+     if(!video){
+       console.log('couldnt fetch request');
+     }
+     res.json({video})
+   }).catch(err => console.log(err))
+});
+
 //get route for streaming the vedio
 //private route
 router.get('/stream-vedio', (req, res) =>{
+
+  const {link} = req.query;
+
 
   // Ensure there is a range given for the video
   const range = req.headers.range;
@@ -94,7 +114,7 @@ router.get('/stream-vedio', (req, res) =>{
   }
 
   // get video stats (about 61MB)
-  const videoPath = path.join(__dirname, '../../../public/vedios/file-1645603876742-298826938.mp4');
+  const videoPath = path.join(__dirname, `../../../public/vedios/${link}`);
   const videoSize = fs.statSync(videoPath).size;
 
   // Parse Range

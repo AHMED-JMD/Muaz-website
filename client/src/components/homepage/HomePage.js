@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {Link} from 'react-router-dom';
 import { AuthContext } from '../../context/users/authContext';
 import Navbar from '../Navbar';
@@ -8,6 +8,7 @@ import Navbar from '../Navbar';
 
 const HomePage = () =>{
   const { auth } = useContext(AuthContext);
+  
   console.log(auth);
   
 
@@ -29,6 +30,7 @@ const HomePage = () =>{
          
          <Link className="btn btn1  " to="#aboutus"> ابدأ الان </Link>
          <Link className="btn btn1-1 " to="/subjects"> تصفح المواد</Link>
+ 
         </div>
         </div>
     </div>
