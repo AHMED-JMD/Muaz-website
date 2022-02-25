@@ -52,7 +52,7 @@ const ArtBook = () =>{
 
         {/* <!--ends here--> */}
       </div>
-    ) : <div className='alert alert-success'>ليس هناك فيديوهات الان</div>
+    ) : <div className='alert alert-success'>ليس هناك فيديوهات الان انتظر قليلا</div>
 }
 
 export default ArtBook;

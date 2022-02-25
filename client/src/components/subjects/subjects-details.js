@@ -34,25 +34,26 @@ axios.post('/v1/vedios/get-byID', body, config)
 <div className="container-fluid cont6">
     <div className="text-center">
      <h1 className="display-3 ">تفاصيل المادة</h1>
-     <p ><Link className='sub-H' to="/">الرئيسية</Link> / <Link className='sub-H' to="/subjects-details">التفاصيل</Link></p>
+     <p ><Link className='sub-H' to="/">الرئيسية</Link> / <Link className='sub-H' to="/subjects-name">التفاصيل</Link></p>
     </div>
 </div>        
 
     {/* <!--end of header--> */}
 
-<div className="container cont5">
- <div className="row">
-   <div className="col-md-8 col-sm-12">
+<div className="container cont9">
+
 {video.link? 
+      <div>
      <div className="detail-img">
-     <video width="500" height="350" controls>
+     <h1 className='text-center'>حصة {video.subName}</h1>
+     <video width="700" height="500" controls controlsList="nodownload">
       <source src={`/v1/vedios/stream-vedio?link=${video.link}`} type="video/mp4" />
      </video>
   </div>
-: <div className='alert alret-success'>انتظر قليلا </div>}
+  </div>
+: <div className='alert alret-warning'>انتظر قليلا </div>}
 
-   </div>
- </div>
+
 </div>
 
 

@@ -5,11 +5,12 @@ export const VideoContext = createContext();
 const VideoContextProvider = (props) =>{
     //DEFINE VIDEO STATE
    const [video, setVideo] = useState({
-    vedio: null
+    vedio: null, 
+    isArrived: false
    });
 
    const AddVideo = (res) =>{
-    setVideo({...video, ...res});
+    setVideo({...video, ...res, isArrived: true});
    }
 
    const DeleteVideo = () =>{

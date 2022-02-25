@@ -21,6 +21,7 @@ app.use('/users/register', require('./routes/users/register'));
 app.use('/users/auth', require('./routes/users/auth') )
 //vedios and files routes
 app.use('/v1/vedios', require('./routes/api/v1/videoApi'));
+app.use('/v1/orders', require('./routes/api/v1/OrderVideo'));
 
 //listening to port
 const port = process.env.PORT || 4000;

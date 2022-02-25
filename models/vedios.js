@@ -30,6 +30,10 @@ const vedioSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    details:{
+        type: String,
+        required: true
+    },
     users: {
         type : Array,
         default: []

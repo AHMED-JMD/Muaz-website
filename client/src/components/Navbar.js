@@ -21,19 +21,33 @@ const { auth, SignOutUser } = useContext(AuthContext);
             <Link className="nav-link active" to="/subjects">تصفح المواد </Link>
           </li>
           
-          { 
-          (auth.isAuthenticated) &&
-          <li className="nav-item">
-            <Link className="nav-link active" to="/user-dashboard">فيديوهاتي</Link>
-          </li>
-         }
+          
 
-          {(auth.isAuthenticated) ? <button className='btn btn8 nav-link' onClick={
+         
+
+          {(auth.isAuthenticated) ? 
+         
+           (auth.user.role === "basic")?
+           <span>
+            <li className="nav-item">
+            <Link className="nav-link active" to="/user-dashboard">فيديوهاتي</Link>
+            </li>
+            <button className='btn btn8 nav-link' onClick={
             () => { SignOutUser()}
-          }>تسجيل الخروج</button> :
-           <li className="nav-item">
+          }>تسجيل الخروج</button>
+            </span>
+           :<span>
+           <li className='nav-item'> <button className='btn btn8 nav-link' onClick={
+            () => { SignOutUser()}
+          }>تسجيل الخروج</button></li>
+            <li className="nav-item">
+            <Link className="nav-link active" to="/admin-dashboard"> لوحة التحكم </Link>
+          </li>
+          </span>
+            :<li className="nav-item">
            <Link className="nav-link active" to="/login">تسجيل الدخول </Link>
-         </li>
+          </li>
+          
           }
          
 

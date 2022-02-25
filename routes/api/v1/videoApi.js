@@ -40,10 +40,11 @@ router.post('/', (req, res) =>{
 
 //post rout get vedios from front 
 //private route
+//post
 router.post('/post-video', upload.single('file'),  (req, res, next) =>{
-    let { subject, kind, booknum, chapter, subName, price } = req.body;
+    let { subject, kind, booknum, chapter, subName, price, details } = req.body;
     let { filename } = req.file;
-
+console.log(details);
 //filter input
 subject = xssFilter.inHTMLData(subject);
 kind = xssFilter.inHTMLData(kind);
@@ -51,19 +52,14 @@ booknum = xssFilter.inHTMLData(booknum);
 chapter = xssFilter.inHTMLData(chapter);
 subName = xssFilter.inHTMLData(subName);
 price = xssFilter.inHTMLData(price);
+details = xssFilter.inHTMLData(details);
 
 
     //check if req.body is complete
- if (!subject || !kind || !booknum || !chapter || !subName || !price || !filename){
+ if (!subject || !kind || !booknum || !chapter || !subName || !price ||  !details || !filename){
      return res.status(400).json({msg: 'please enter all fields'});
  }
- //check if file is replicated
-  Vedios.findOne({subName})
-   .then(vedio =>{
-     if(vedio){
-       return res.status(400).json({msg: "file already exists"});
-     }
-   }).catch(err => console.log(err));
+ 
 
  //add vedio to database
   let newVedio = new Vedios({
@@ -73,7 +69,8 @@ price = xssFilter.inHTMLData(price);
      booknum,
      chapter,
      subName,
-     price 
+     price,
+     details 
     });
 
    newVedio.save()
@@ -106,8 +103,6 @@ router.get('/stream-vedio', (req, res) =>{
 
   const {link} = req.query;
 
-
-  // Ensure there is a range given for the video
   const range = req.headers.range;
   if (!range) {
     res.status(400).send("Requires Range header");
@@ -143,5 +138,22 @@ router.get('/stream-vedio', (req, res) =>{
 
 });
 
+//route for delete videos 
+//private route
+router.post('/delete-video', (req, res) =>{
+const {id} = req.body;
+ 
+if(!id){
+  return res.status(400).json({msg:'please provide an id'})
+}
+
+Vedios.deleteOne({_id: id})
+ .then(video =>{
+   console.log(video)
+   res.json(video)
+ })
+ .catch(err => console.log(err))
+
+});
 
 module.exports = router;

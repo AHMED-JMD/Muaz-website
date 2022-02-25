@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema({
         type: String,
         default: 'basic'
     },
+    videosId:{
+        type: Array,
+        default: []
+    }
 });
 
 module.exports = mongoose.model('user', UserSchema);
