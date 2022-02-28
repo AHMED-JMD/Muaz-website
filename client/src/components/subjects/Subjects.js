@@ -13,7 +13,7 @@ const Subjects = () => {
   console.log(auth);
   return (
     <div className="homepage">
-      <Navbar />
+   
 
       {/* <!--header--> */}
       <div className="container-fluid cont6">

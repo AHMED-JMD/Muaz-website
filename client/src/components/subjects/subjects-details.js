@@ -28,7 +28,7 @@ axios.post('/v1/vedios/get-byID', body, config)
  return(
 <div className='subjectDetails'>
  
-<Navbar />
+
 
     {/* <!--header--> */}
 <div className="container-fluid cont6">

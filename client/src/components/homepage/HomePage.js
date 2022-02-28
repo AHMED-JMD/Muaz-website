@@ -15,7 +15,7 @@ const HomePage = () =>{
  return(
 <div className='homepage'>
 
-<Navbar />
+
 
 {/* <!--header starts here-->     */}
 <header> 

@@ -28,7 +28,7 @@ const Login = () => {
       .post("/users/auth", body, config)
       .then((res) => {
         SignINUser(res.data);
-        ClearErrors()
+        ClearErrors();
       })
       .catch((err) => {
         GetErrors(err.response.data, err.response.status, "login_err");
@@ -39,13 +39,13 @@ const Login = () => {
   return (
     <div className="login">
       <div className="section">
-        <div className="box">
+        <div className="box mt-5">
           <form action="" onSubmit={handleSubmit}>
             <h1 className="display-5 text-center">تسجيل الدخول </h1>
             {err.id === "login_err" ? (
               <div className="errMsg">{err.msg.msg}</div>
             ) : null}
-            {auth.isAuthenticated ? (
+            {auth.token ? (
               <div className="alert alert-success">
                 <span> تم تسجيل الدخول بنجاح </span> <br />
                 <Link className="btn btn8" to="/subjects">

@@ -1,107 +1,134 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const multer = require('multer');
-const path = require('path');
-const Vedios = require('../../../models/vedios');
-const xssFilter = require('xss-filters');
-const fs = require('fs');
-
+const multer = require("multer");
+const path = require("path");
+const Vedios = require("../../../models/vedios");
+const User = require("../../../models/users");
+const xssFilter = require("xss-filters");
+const fs = require("fs");
+const validUser = require("../../../middlwares/auth");
 
 //multer middleware
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'public/vedios')
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      cb(null, file.fieldname + '-' + uniqueSuffix + '.mp4' )
-    }
-  })
-  
+  destination: function (req, file, cb) {
+    cb(null, "public/videos");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + "-" + uniqueSuffix + ".mp4");
+  },
+});
+
 const upload = multer({ storage: storage });
 
 //public route
 //get vedios from db
-router.post('/', (req, res) =>{
-  let {kind, chapter} = req.body;
+router.post("/", (req, res) => {
+  let { kind, chapter } = req.body;
 
-  if( !kind || !chapter){
-    return res.status(400).json({msg: 'please set headers'})
+  if (!kind || !chapter) {
+    return res.status(400).json({ msg: "please set headers" });
   }
 
-  Vedios.find({kind, chapter})
-   .then(videos =>{
-     if(!videos){
-       console.log('couldnt fetch from db for some reasons')
-     }
-     res.json({videos});
-   }).catch(err => console.log(err));
+  Vedios.find({ kind, chapter })
+    .then((videos) => {
+      if (!videos) {
+        console.log("couldnt fetch from db for some reasons");
+      }
+      res.json({ videos });
+    })
+    .catch((err) => console.log(err));
 });
 
-//post rout get vedios from front 
+//post rout get vedios from front
 //private route
 //post
-router.post('/post-video', upload.single('file'),  (req, res, next) =>{
+router.post(
+  "/post-video",
+  upload.single("file"),
+  validUser,
+  (req, res, next) => {
     let { subject, kind, booknum, chapter, subName, price, details } = req.body;
     let { filename } = req.file;
-console.log(details);
-//filter input
-subject = xssFilter.inHTMLData(subject);
-kind = xssFilter.inHTMLData(kind);
-booknum = xssFilter.inHTMLData(booknum);
-chapter = xssFilter.inHTMLData(chapter);
-subName = xssFilter.inHTMLData(subName);
-price = xssFilter.inHTMLData(price);
-details = xssFilter.inHTMLData(details);
-
+    console.log(details);
+    //filter input
+    subject = xssFilter.inHTMLData(subject);
+    kind = xssFilter.inHTMLData(kind);
+    booknum = xssFilter.inHTMLData(booknum);
+    chapter = xssFilter.inHTMLData(chapter);
+    subName = xssFilter.inHTMLData(subName);
+    price = xssFilter.inHTMLData(price);
+    details = xssFilter.inHTMLData(details);
 
     //check if req.body is complete
- if (!subject || !kind || !booknum || !chapter || !subName || !price ||  !details || !filename){
-     return res.status(400).json({msg: 'please enter all fields'});
- }
- 
+    if (
+      !subject ||
+      !kind ||
+      !booknum ||
+      !chapter ||
+      !subName ||
+      !price ||
+      !details ||
+      !filename
+    ) {
+      return res.status(400).json({ msg: "please enter all fields" });
+    }
+    //check user is admin
+    User.findById(req.user.id)
+      .then((user) => {
+        if (!user) {
+          console.log("no user found");
+        } else if (user.role !== "admin") {
+          return res.status(401).json("not allowed, your not an admin");
+        }
+        //add vedio to database
+        let newVedio = new Vedios({
+          link: filename,
+          subject,
+          kind,
+          booknum,
+          chapter,
+          subName,
+          price,
+          details,
+        });
 
- //add vedio to database
-  let newVedio = new Vedios({
-     link: filename,
-     subject,
-     kind,
-     booknum,
-     chapter,
-     subName,
-     price,
-     details 
-    });
-
-   newVedio.save()
-    .then(vedio =>{
-      res.json({vedio});
-    }).catch(err => console.log('vedio_err', err)); 
-});
+        newVedio
+          .save()
+          .then((vedio) => {
+            res.json({ vedio });
+          })
+          .catch((err) => console.log("vedio_err", err));
+      })
+      .catch((err) => console.log(err));
+  }
+);
 
 //route for getting video by id
 //public route
-router.post('/get-byID', (req, res) =>{
+router.post("/get-byID", (req, res) => {
   const { id } = req.body;
 
-  if(!id){
-    return res.status(400).json({msg:'provide a valid id'})
+  if (!id) {
+    return res.status(400).json({ msg: "provide a valid id" });
   }
 
-  Vedios.findById({_id: id})
-   .then(video =>{
-     if(!video){
-       console.log('couldnt fetch request');
-     }
-     res.json({video})
-   }).catch(err => console.log(err))
+  Vedios.findById({ _id: id })
+    .then((video) => {
+      if (!video) {
+        console.log("couldnt fetch request");
+      }
+      res.json({ video });
+    })
+    .catch((err) => console.log(err));
 });
 
 //get route for streaming the vedio
 //private route
-router.get('/stream-vedio', (req, res) =>{
 
-  const {link} = req.query;
+//VALIDATE USER HERE
+TODO: router.get("/stream-vedio", (req, res) => {
+  const { link } = req.query;
 
   const range = req.headers.range;
   if (!range) {
@@ -109,7 +136,7 @@ router.get('/stream-vedio', (req, res) =>{
   }
 
   // get video stats (about 61MB)
-  const videoPath = path.join(__dirname, `../../../public/vedios/${link}`);
+  const videoPath = path.join(__dirname, `../../../public/videos/${link}`);
   const videoSize = fs.statSync(videoPath).size;
 
   // Parse Range
@@ -135,25 +162,42 @@ router.get('/stream-vedio', (req, res) =>{
 
   // Stream the video chunk to the client
   videoStream.pipe(res);
-
 });
 
-//route for delete videos 
+//route for delete videos
 //private route
-router.post('/delete-video', (req, res) =>{
-const {id} = req.body;
- 
-if(!id){
-  return res.status(400).json({msg:'please provide an id'})
-}
+router.post("/delete-video", validUser, (req, res) => {
+  const { videoId, userId } = req.body;
 
-Vedios.deleteOne({_id: id})
- .then(video =>{
-   console.log(video)
-   res.json(video)
- })
- .catch(err => console.log(err))
-
+  if (!videoId || !userId) {
+    return res.status(400).json({ msg: "please provide an id" });
+  }
+  //check user role and delete from file system
+  User.findById(userId)
+    .then((user) => {
+      if (!user) console.log("couldnt find user");
+      if (user.role !== "admin")
+        return res.status(401).json("only admins can delete videos");
+      //find and delete from server
+      Vedios.findById(videoId).then((video) => {
+        fs.unlink(
+          path.join(__dirname, `../../../public/videos/${video.link}`),
+          (err) => {
+            if (err) console.log(err);
+            else {
+              console.log("deleted video successfully from fs");
+            }
+          }
+        );
+        //delete video from db
+        Vedios.deleteOne({ _id: video._id })
+          .then((video) => {
+            console.log(video);
+          })
+          .catch((err) => console.log(err));
+      });
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

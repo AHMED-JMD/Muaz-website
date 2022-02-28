@@ -1,88 +1,87 @@
-import React, {  useContext, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import HomePage from './components/homepage/HomePage';
-import Subjects from './components/subjects/Subjects';
-import Login from './components/login';
-import SignUp from './components/signUp';
-import SubjectsDetails from './components/subjects/subjects-details';
-import AuthContextProvider, { AuthContext } from './context/users/authContext';
-import ErrContextProvider, { ErrContext } from './context/users/errContext';
-import AdminDashboard from './components/dashbord/adminDashbord';
-import axios from 'axios';
-import SubjectsName from './components/subjects/subject-name';
+import React, { useContext, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./components/homepage/HomePage";
+import Subjects from "./components/subjects/Subjects";
+import Login from "./components/login";
+import SignUp from "./components/signUp";
+import SubjectsDetails from "./components/subjects/subjects-details";
+import AuthContextProvider, { AuthContext } from "./context/users/authContext";
+import ErrContextProvider, { ErrContext } from "./context/users/errContext";
+import AdminDashboard from "./components/dashbord/adminDashbord";
+import axios from "axios";
+import SubjectsName from "./components/subjects/subject-name";
+import Navbar from "./components/Navbar";
+import UserDashboard from "./components/dashbord/user-dashboard";
 
 function App() {
+  const { auth, LoadUser, SignOutUser } = useContext(AuthContext);
+  const { GetErrors } = useContext(ErrContext);
+  const token = auth.token;
 
-const {  auth, LoadUser, SignOutUser } = useContext(AuthContext);
-const { GetErrors } = useContext(ErrContext);  
-const token = auth.token;
+  console.log(auth);
 
-console.log(auth);
+  useEffect(() => {
+    try {
+      //setting headers
+      let config = {
+        headers: {
+          "content-type": "application/json",
+        },
+      };
+      //check token and add it to headers
 
-useEffect(() =>{
-
-  try{
-  //setting headers
-  let config = {
-    headers: {
-        "content-type" : "application/json"
+      if (token) {
+        config.headers["x-auth-token"] = token;
+      }
+      console.log(config);
+      //get request to db
+      axios
+        .get("/users/auth/get-user", config)
+        .then((res) => {
+          LoadUser(res.data.user);
+        })
+        .catch((er) => {
+          console.log(er);
+          // GetErrors
+          GetErrors(er.response.data, er.response.status);
+          // SignOutUser
+          SignOutUser();
+        });
+    } catch (err) {
+      if (err) {
+        console.log(err);
+      }
     }
-  };
-//check token and add it to headers
+  }, []);
 
-if(token){
-  config.headers["x-auth-token"] = token;
-  }
-  console.log(config)
-  //get request to db
-  axios.get('/users/auth/get-user',config)
-   .then(res =>{
-    LoadUser(res.data.user);
-    
-   }) 
-   .catch(er =>{
-     console.log(er);
-    // GetErrors
-    GetErrors(er.response.data, er.response.status)
-    // SignOutUser
-    SignOutUser();
-  })
-}catch(err) {
-if(err){ 
-  console.log(err);
- }
-}
+  console.log(auth);
 
-}, []);
+  return (
+    <div className="app">
+      <AuthContextProvider>
+        <ErrContextProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
 
-console.log(auth);
+            <Route path="/subjects" element={<Subjects />} />
 
-  return(
- <div className='app'>   
- <AuthContextProvider>
- <ErrContextProvider>
+            <Route path="/subjects-name" element={<SubjectsName />} />
 
-  <Routes> 
-  
-      <Route path="/" element={ <HomePage /> } />
-   
-      <Route path="/subjects" element={ <Subjects /> } />
+            <Route path="/subjects-details" element={<SubjectsDetails />} />
 
-      <Route path="/subjects-name" element={<SubjectsName /> } />
+            <Route path="/login" element={<Login />} />
 
-      <Route path="/subjects-details" element={<SubjectsDetails />} />
-  
-      <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
 
-      <Route path="/signup" element={<SignUp />} />
-      
-      <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
-  </Routes>
- </ErrContextProvider> 
- </AuthContextProvider>   
-  </div>
-);
+            <Route path="/user-dashboard" element={<UserDashboard />} />
+          </Routes>
+        </ErrContextProvider>
+      </AuthContextProvider>
+    </div>
+  );
 }
 
 export default App;
