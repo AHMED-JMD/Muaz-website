@@ -22,6 +22,22 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 //public route
+//get all videos data from
+router.get("/all-videos", (req, res) => {
+  Vedios.find({})
+    .then((video) => {
+      Promise.all(
+        video.map((video1) => {
+          return { subName: video1.subName };
+        })
+      ).then((result) => {
+        res.json(result);
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
+//public route
 //get vedios from db
 router.post("/", (req, res) => {
   let { kind, chapter } = req.body;
@@ -103,6 +119,19 @@ router.post(
       .catch((err) => console.log(err));
   }
 );
+//route for getting user videos by-id
+//public route
+router.post("/user-videos", validUser, (req, res) => {
+  let { videosId } = req.body;
+
+  videosId.map((videoId) => {
+    Vedios.findById(videoId)
+      .then((video) => {
+        res.json(video);
+      })
+      .catch((err) => console.log(err));
+  });
+});
 
 //route for getting video by id
 //public route
@@ -167,19 +196,43 @@ TODO: router.get("/stream-vedio", (req, res) => {
 //route for delete videos
 //private route
 router.post("/delete-video", validUser, (req, res) => {
-  const { videoId, userId } = req.body;
+  const { videoId } = req.body;
 
-  if (!videoId || !userId) {
+  if (!videoId) {
     return res.status(400).json({ msg: "please provide an id" });
   }
   //check user role and delete from file system
-  User.findById(userId)
+  User.findById(req.user.id)
     .then((user) => {
       if (!user) console.log("couldnt find user");
       if (user.role !== "admin")
         return res.status(401).json("only admins can delete videos");
-      //find and delete from server
+
       Vedios.findById(videoId).then((video) => {
+        //check if video has users
+        if (video.users.length) {
+          video.users.map((user2) => {
+            console.log(user2);
+            //find by id
+            User.findById(user2).then((videoUser) => {
+              console.log(videoUser);
+              //if user has videos
+              if (videoUser.videosId.length) {
+                let newVideoId = videoUser.videosId.filter(
+                  (newVideo) => newVideo !== videoId
+                );
+                //updating users videos
+                User.findByIdAndUpdate(videoUser, { videosId: newVideoId })
+                  .then((moduser) => {
+                    console.log(moduser);
+                  })
+                  .catch((err) => console.log(err));
+              }
+            });
+          });
+        }
+
+        //find and delete from server
         fs.unlink(
           path.join(__dirname, `../../../public/videos/${video.link}`),
           (err) => {

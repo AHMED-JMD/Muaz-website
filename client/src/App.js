@@ -10,7 +10,7 @@ import ErrContextProvider, { ErrContext } from "./context/users/errContext";
 import AdminDashboard from "./components/dashbord/adminDashbord";
 import axios from "axios";
 import SubjectsName from "./components/subjects/subject-name";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import UserDashboard from "./components/dashbord/user-dashboard";
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
       axios
         .get("/users/auth/get-user", config)
         .then((res) => {
-          LoadUser(res.data.user);
+          LoadUser(res.data);
         })
         .catch((er) => {
           console.log(er);

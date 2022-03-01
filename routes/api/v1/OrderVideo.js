@@ -68,10 +68,28 @@ router.post("/give-access", (req, res) => {
   if (!videoId || !userId) {
     return res.status(400).json({ msg: "please provide user id and video id" });
   }
-
-  Users.findByIdAndUpdate(userId, { videosId: videoId })
+  //update user
+  Users.findById(userId)
     .then((user) => {
-      console.log(user);
+      //update user videos
+      let newVideoId = user.videosId.push(videoId);
+      Users.findByIdAndUpdate(userId, { videosId: newVideoId })
+        .then((newuser) => {
+          console.log(newuser);
+        })
+        .catch((err) => console.log(err));
+      //update videos
+      Vedios.findById(videoId)
+        .then((video) => {
+          let newUserId = video.users.push(userId);
+          Vedios.findByIdAndUpdate(videoId, { users: newUserId })
+            .then((newvideo) => {
+              console.log(newvideo);
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+      //returning user
       res.json(user);
     })
     .catch((err) => console.log(err));
@@ -79,17 +97,17 @@ router.post("/give-access", (req, res) => {
 
 //delete request
 router.post("/delete-req", validUser, (req, res) => {
-  let { videoId } = req.body;
-
-  if (!videoId) {
-    return res.status(400).json({ msg: "please provide user id and video id" });
+  let { orderId } = req.body;
+  console.log(orderId);
+  if (!orderId) {
+    return res.status(400).json({ msg: "please provide order id" });
   }
   //find and delete
-  Vedios.deleteOne({ _id: videoId })
-    .then((video) => {
-      console.log(video);
+  Request.deleteOne({ _id: orderId })
+    .then((order) => {
+      console.log(order);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("delete err", err));
 });
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../context/users/authContext";
+import { AuthContext } from "../../context/users/authContext";
 import { Link } from "react-router-dom";
+import Search from "./search";
 
 const Navbar = () => {
   const { auth, SignOutUser } = useContext(AuthContext);
@@ -84,17 +85,7 @@ const Navbar = () => {
               </li>
             )}
           </ul>
-          <form className="d-flex">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="ابحث عن المواد"
-              aria-label="Search"
-            />
-            <button className="btn btn0 btn-secondary" type="submit">
-              ادخل
-            </button>
-          </form>
+          <Search />
         </div>
       </div>
     </nav>

@@ -1,25 +1,20 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/users/authContext";
-import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
 import ScienceBook1 from "./scienceBook1";
 import ScienceBook2 from "./scienceBook2";
 import ArtBook from "./artBook";
 
-
 const Subjects = () => {
-
   const { auth } = useContext(AuthContext);
   console.log(auth);
   return (
     <div className="homepage">
-   
-
       {/* <!--header--> */}
       <div className="container-fluid cont6">
         <div className="text-center">
           <h1 className="display-3 h1">المواد</h1>
-     
+
           <p>
             <Link className="sub-H" to="/">
               الرئيسية
@@ -42,9 +37,9 @@ const Subjects = () => {
                 {" "}
                 الرياضيات المتخصصة
               </h2>
-               <ScienceBook1 />
-               <br /> <br />
-               <ScienceBook2 />
+              <ScienceBook1 />
+              <br /> <br />
+              <ScienceBook2 />
             </div>
             {/* <!--subjects container ends here--> */}
 

@@ -377,6 +377,23 @@ nav {
   margin-right: 15px !important;
 }
 
+/* animation to hide message */
+#hidden {
+  animation: hideElement 0 ease-in 3s;
+  animation-fill-mode: forwards;
+}
+@keyframes hideElement {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 /*footer*/
 footer {
   text-align: center;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import Navbar from "../Navbar";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../context/users/authContext";
@@ -7,6 +6,7 @@ import { AuthContext } from "../../context/users/authContext";
 const SubjectsName = () => {
   let [searchParams, setSearchPrams] = useSearchParams();
   let [datdeleted, setDatdeleted] = useState("");
+  let [ordered, setOrdered] = useState(false);
   let [err, setErr] = useState();
   const { auth } = useContext(AuthContext);
 
@@ -17,7 +17,7 @@ const SubjectsName = () => {
   console.log(video);
 
   //function to delete video
-  const deletVideo = (videoId, userId) => {
+  const deletVideo = (videoId) => {
     let token = auth.token;
 
     let config = {
@@ -28,7 +28,7 @@ const SubjectsName = () => {
     if (token) {
       config.headers["x-auth-token"] = token;
     }
-    let data = { videoId, userId };
+    let data = { videoId };
     axios
       .post("/v1/vedios/delete-video", data, config)
       .then((res) => setDatdeleted("true"))
@@ -42,8 +42,12 @@ const SubjectsName = () => {
       .post("/v1/orders/", data)
       .then((res) => {
         console.log(res);
+        setOrdered(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setOrdered(false);
+      });
   };
 
   useEffect(() => {
@@ -84,12 +88,18 @@ const SubjectsName = () => {
       {/* <!--end of header--> */}
 
       <div className=" cont10">
+        {ordered ? (
+          <h4 className="alet alert-success" id="hidden">
+            تم طلب الفيديو بنجاح الرجاء التواصل على الرقم{" "}
+            <span tel="0126414252">0126414252</span>
+          </h4>
+        ) : null}
         <div className="row">
           {video.length ? (
             video.map((video1) => {
               return (
                 <div className="col-lg-4 col-md-5 col-sm-12" key={video1._id}>
-                  <div className="card" key={video1._id}>
+                  <div className="card">
                     <div className="card-header">
                       {video1.subject} {" المادة"} {video1.chapter}
                     </div>
@@ -148,9 +158,7 @@ const SubjectsName = () => {
                                       type="button"
                                       className="btn btn-danger "
                                       data-bs-dismiss="modal"
-                                      onClick={() =>
-                                        deletVideo(video1._id, auth.user.id)
-                                      }
+                                      onClick={() => deletVideo(video1._id)}
                                     >
                                       حذف
                                     </button>

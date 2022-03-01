@@ -49,8 +49,8 @@ const AdminDashboard = () => {
   };
 
   //function to delete request
-  const deleteRequest = (videoId) => {
-    let data = { videoId };
+  const deleteRequest = (orderId) => {
+    let data = { orderId };
     console.log(data);
     //setup token in headers
     let token = auth.token;
@@ -117,7 +117,7 @@ const AdminDashboard = () => {
               <h1 className="text-center">اضف فيديو جديد</h1>
 
               {video.isArrived ? (
-                <div className="alert alert-success">
+                <div className="alert alert-success " id="hidden">
                   تم اضافة الفيديو بنجاح
                 </div>
               ) : null}
@@ -146,7 +146,7 @@ const AdminDashboard = () => {
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                   >
-                    <option value=" ">اختر</option>
+                    <option defaultValue={null}>اختر</option>
                     <option value="رياضيات الصف الثالث">
                       رياضيات الصف الثالث
                     </option>
@@ -163,7 +163,7 @@ const AdminDashboard = () => {
                     value={kind}
                     onChange={(e) => setKind(e.target.value)}
                   >
-                    <option value=" ">اختر </option>
+                    <option defaultValue={null}>اختر </option>
                     <option value="علمي">علمي</option>
                     <option value="أدبي">أدبي</option>
                     <option value="حصص مراجعه">حصص مراجعه</option>
@@ -180,7 +180,7 @@ const AdminDashboard = () => {
                     value={booknum}
                     onChange={(e) => setBooknum(e.target.value)}
                   >
-                    <option value=" ">اختر </option>
+                    <option defaultValue={null}>اختر </option>
                     <option value="الكتاب الأول"> العلمي الأول</option>
                     <option value="الكتاب الثاني">العلمي الثاني</option>
                     <option value="كتاب الأدبي"> الأدبي</option>
@@ -197,18 +197,24 @@ const AdminDashboard = () => {
                     value={chapter}
                     onChange={(e) => setChapter(e.target.value)}
                   >
-                    <option value=" ">اختر </option>
-                    <option value="الاحتمالات">الاحتمالات </option>
-                    <option value="الاحصاء">الاحصاء </option>
-                    <option value="الكسور">الكسور </option>
-                    <option value="المصفوفات">المصفوفات </option>
-                    <option value="مبدأ العد">مبدأ العد </option>
-                    <option value="الاعداد المركبة">الاعداد المركبة </option>
-                    <option value="التفاضل">التفاضل </option>
-                    <option value="التكامل">التكامل </option>
-                    <option value="الدائرة">الدائرة </option>
-                    <option value="الدوال">الدوال </option>
-                    <option value="تطبيقات التفاضل">تطبيقات التفاضل </option>
+                    <option defaultValue={null}>اختر </option>
+
+                    <optgroup label="الكتاب العلمي الاول">
+                      <option value="الاحتمالات">الاحتمالات </option>
+                      <option value="الاحصاء">الاحصاء </option>
+                      <option value="الكسور">الكسور </option>
+                      <option value="المصفوفات">المصفوفات </option>
+                      <option value="مبدأ العد">مبدأ العد </option>
+                    </optgroup>
+
+                    <optgroup label="الكتاب العلمي الثاني">
+                      <option value="الاعداد المركبة">الاعداد المركبة </option>
+                      <option value="التفاضل">التفاضل </option>
+                      <option value="التكامل">التكامل </option>
+                      <option value="الدائرة">الدائرة </option>
+                      <option value="الدوال">الدوال </option>
+                      <option value="تطبيقات التفاضل">تطبيقات التفاضل </option>
+                    </optgroup>
                   </select>
                 </div>
                 <div className="form-group">
@@ -259,7 +265,7 @@ const AdminDashboard = () => {
 
             {isArrived ? (
               <div className="col-lg-8 col-md-7 col-sm-12 order">
-                <h1 className="display-5 text-center">طلبات الفيديوهات</h1>
+                <h1 className="display-5 text-center mt-3">طلبات الفيديوهات</h1>
                 <ul className="list-group list-group-flush">
                   {order.map((order1) => {
                     return (
@@ -315,7 +321,7 @@ const AdminDashboard = () => {
                                   type="button"
                                   className="btn btn-danger "
                                   data-bs-dismiss="modal"
-                                  onClick={() => deleteRequest(order1.videoId)}
+                                  onClick={() => deleteRequest(order1._id)}
                                 >
                                   حذف
                                 </button>
