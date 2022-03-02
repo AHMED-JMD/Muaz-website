@@ -8,7 +8,9 @@ const AdminDashboard = () => {
   const { AddVideo, video } = useContext(VideoContext);
   const [order, setOrder] = useState([]);
   const [isArrived, setIsArrived] = useState(false);
-  const [deleted, setDeleted] = useState("");
+
+  let [deleted, setDeleted] = useState(false);
+  let [permGranted, setPermGranted] = useState(false);
   //request states to add a new video
   const [file, setFile] = useState("");
   const [subject, setSubject] = useState("");
@@ -44,7 +46,10 @@ const AdminDashboard = () => {
     console.log(data);
     axios
       .post("/v1/orders/give-access", data)
-      .then((res) => console.log(res))
+      .then((res) => {
+        setPermGranted(true);
+        console.log(res);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -67,7 +72,7 @@ const AdminDashboard = () => {
       .post("/v1/orders/delete-req", data, config)
       .then((res) => {
         console.log(res.data);
-        setDeleted("true");
+        setDeleted((prev) => !prev);
       })
       .catch((err) => console.log(err));
   };
@@ -117,7 +122,7 @@ const AdminDashboard = () => {
               <h1 className="text-center">اضف فيديو جديد</h1>
 
               {video.isArrived ? (
-                <div className="alert alert-success " id="hidden">
+                <div className="alert alert-success back-message " id="hidden">
                   تم اضافة الفيديو بنجاح
                 </div>
               ) : null}
@@ -265,6 +270,11 @@ const AdminDashboard = () => {
 
             {isArrived ? (
               <div className="col-lg-8 col-md-7 col-sm-12 order">
+                {permGranted ? (
+                  <div className="alert alert-success back-message">
+                    تم اعطاء الاذن بنجاح الرجاء التواصل مع الطالب المعني
+                  </div>
+                ) : null}
                 <h1 className="display-5 text-center mt-3">طلبات الفيديوهات</h1>
                 <ul className="list-group list-group-flush">
                   {order.map((order1) => {

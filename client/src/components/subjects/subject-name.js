@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/users/authContext";
 
 const SubjectsName = () => {
   let [searchParams, setSearchPrams] = useSearchParams();
-  let [datdeleted, setDatdeleted] = useState("");
+  let [datdeleted, setDatdeleted] = useState(false);
   let [ordered, setOrdered] = useState(false);
   let [err, setErr] = useState();
   const { auth } = useContext(AuthContext);
@@ -31,7 +31,7 @@ const SubjectsName = () => {
     let data = { videoId };
     axios
       .post("/v1/vedios/delete-video", data, config)
-      .then((res) => setDatdeleted("true"))
+      .then((res) => setDatdeleted((prev) => !prev))
       .catch((err) => setErr(err.response.data));
   };
   //function to order videos
@@ -88,13 +88,13 @@ const SubjectsName = () => {
       {/* <!--end of header--> */}
 
       <div className=" cont10">
-        {ordered ? (
-          <h4 className="alet alert-success" id="hidden">
-            تم طلب الفيديو بنجاح الرجاء التواصل على الرقم{" "}
-            <span tel="0126414252">0126414252</span>
-          </h4>
-        ) : null}
         <div className="row">
+          {ordered ? (
+            <h4 className="alert alert-success back-message ">
+              تم طلب الفيديو بنجاح الرجاء التواصل عن طريق االايميل او الهاتف
+              الموجودة على الصفحة الرئيسية{" "}
+            </h4>
+          ) : null}
           {video.length ? (
             video.map((video1) => {
               return (

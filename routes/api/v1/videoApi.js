@@ -56,6 +56,18 @@ router.post("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+//public route
+//search for specific video
+router.get("/searched-video", (req, res) => {
+  const { subName } = req.body;
+
+  Vedios.findOne({ subName })
+    .then((video) => {
+      res.json(video);
+    })
+    .catch((err) => console.log(err));
+});
+
 //post rout get vedios from front
 //private route
 //post
@@ -123,13 +135,16 @@ router.post(
 //public route
 router.post("/user-videos", validUser, (req, res) => {
   let { videosId } = req.body;
+  console.log(videosId);
 
-  videosId.map((videoId) => {
-    Vedios.findById(videoId)
-      .then((video) => {
-        res.json(video);
-      })
-      .catch((err) => console.log(err));
+  Promise.all(
+    videosId.map((videoId) => {
+      return Vedios.findById(videoId).then((video) => {
+        return video;
+      });
+    })
+  ).then((result) => {
+    res.json(result);
   });
 });
 
@@ -221,6 +236,7 @@ router.post("/delete-video", validUser, (req, res) => {
                 let newVideoId = videoUser.videosId.filter(
                   (newVideo) => newVideo !== videoId
                 );
+                console.log(newVideoId);
                 //updating users videos
                 User.findByIdAndUpdate(videoUser, { videosId: newVideoId })
                   .then((moduser) => {

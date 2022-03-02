@@ -12,6 +12,7 @@ import axios from "axios";
 import SubjectsName from "./components/subjects/subject-name";
 import Navbar from "./components/Navbar/Navbar";
 import UserDashboard from "./components/dashbord/user-dashboard";
+import SearchResult from "./components/searchResult";
 
 function App() {
   const { auth, LoadUser, SignOutUser } = useContext(AuthContext);
@@ -77,6 +78,8 @@ function App() {
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
             <Route path="/user-dashboard" element={<UserDashboard />} />
+
+            <Route path="/search-result" element={<SearchResult />} />
           </Routes>
         </ErrContextProvider>
       </AuthContextProvider>

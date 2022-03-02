@@ -37,7 +37,7 @@ const Navbar = () => {
 
             {auth.isAuthenticated ? (
               auth.user.role === "basic" ? (
-                <span>
+                <>
                   <li className="nav-item">
                     <Link className="nav-link active" to="/user-dashboard">
                       فيديوهاتي
@@ -54,9 +54,9 @@ const Navbar = () => {
                       تسجيل الخروج
                     </Link>
                   </li>
-                </span>
+                </>
               ) : (
-                <span>
+                <>
                   <li className="nav-item">
                     <Link className="nav-link active" to="/admin-dashboard">
                       {" "}
@@ -75,7 +75,7 @@ const Navbar = () => {
                       تسجيل الخروج
                     </Link>
                   </li>
-                </span>
+                </>
               )
             ) : (
               <li className="nav-item">

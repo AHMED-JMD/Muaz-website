@@ -4,6 +4,7 @@ const Vedios = require("../../../models/vedios");
 const Users = require("../../../models/users");
 const Request = require("../../../models/request");
 const validUser = require("../../../middlwares/auth");
+
 //function to get orders
 router.get("/get-request", validUser, (req, res) => {
   Users.findById(req.user.id)
@@ -69,11 +70,15 @@ router.post("/give-access", (req, res) => {
     return res.status(400).json({ msg: "please provide user id and video id" });
   }
   //update user
+  let newVideoId = [];
+  let newUserId = [];
   Users.findById(userId)
     .then((user) => {
       //update user videos
-      let newVideoId = user.videosId.push(videoId);
-      Users.findByIdAndUpdate(userId, { videosId: newVideoId })
+      newVideoId = user.videosId.push(videoId);
+      console.log(newVideoId);
+
+      Users.findByIdAndUpdate(userId, { videosId: user.videosId })
         .then((newuser) => {
           console.log(newuser);
         })
@@ -81,8 +86,10 @@ router.post("/give-access", (req, res) => {
       //update videos
       Vedios.findById(videoId)
         .then((video) => {
-          let newUserId = video.users.push(userId);
-          Vedios.findByIdAndUpdate(videoId, { users: newUserId })
+          newUserId = video.users.push(userId);
+          console.log(newUserId);
+
+          Vedios.findByIdAndUpdate(videoId, { users: video.users })
             .then((newvideo) => {
               console.log(newvideo);
             })
@@ -105,7 +112,7 @@ router.post("/delete-req", validUser, (req, res) => {
   //find and delete
   Request.deleteOne({ _id: orderId })
     .then((order) => {
-      console.log(order);
+      res.json(order);
     })
     .catch((err) => console.log("delete err", err));
 });

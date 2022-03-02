@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./dropdown.css";
+import { v4 as uuidv4 } from "uuid";
 
 const Search = () => {
   let [allData, setAllData] = useState([]);
   let [filterData, setFilterData] = useState([]);
+  let [open, setOpen] = useState(false);
+  let [selVal, setSelVal] = useState(null);
+  let [query, setQuery] = useState("");
   console.log(allData);
   console.log(filterData);
 
@@ -19,23 +24,50 @@ const Search = () => {
 
   const handleChange = (e) => {
     let value = e.target.value.toLowerCase();
-    let result = [];
+    if (!value) return;
+    setOpen(true);
 
-    result = allData.filter((data) => {
-      return data.subName.Search(value) != -1;
-    });
-
-    setFilterData(result);
+    const filter = new RegExp(`(${value})\w+`);
+    console.log(filter);
+    console.log(
+      ["ahmed", "ali", "mohamed"].filter((data) => {
+        console.log(filter.test(data));
+      })
+    );
   };
   return (
     <form className="d-flex">
-      <input
-        className="form-control me-2"
-        type="search"
-        placeholder="ابحث عن المواد"
-        aria-label="Search"
-        onChange={(e) => handleChange(e)}
-      />
+      <div className="dropdown">
+        <div className="control">
+          <div className="selected-value">
+            <input
+              type="text"
+              onChange={handleChange}
+              placeholder={selVal ? selVal : "ابحث باسم المادة"}
+              onClick={() => setOpen((prev) => !prev)}
+            />
+          </div>
+          <div className={`arrow ${open ? "open" : null}`} />
+        </div>
+        <div className={`options ${open ? "open" : null}`}>
+          {filterData.map((data) => {
+            return (
+              <div
+                className={`option ${
+                  selVal === data.subName ? "selected" : null
+                }`}
+                key={uuidv4()}
+                onClick={() => {
+                  setSelVal(data.subName);
+                  setOpen(false);
+                }}
+              >
+                {data.subName}
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
       <button className="btn btn0 btn-secondary" type="submit">
         ادخل

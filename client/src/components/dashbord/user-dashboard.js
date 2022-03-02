@@ -6,7 +6,6 @@ import axios from "axios";
 const UserDashboard = () => {
   const { auth } = useContext(AuthContext);
 
-  const [render, setRender] = useState("");
   const [video, setVideo] = useState([]);
   console.log(video);
 
@@ -23,8 +22,10 @@ const UserDashboard = () => {
       config.headers["x-auth-token"] = token;
     }
     if (auth.user) {
-      let videosId = auth.user.videosId;
+      let videosId = [];
+      videosId = auth.user.videosId;
       const data = { videosId };
+      console.log(data);
 
       axios
         .post("/v1/vedios/user-videos", data, config)
@@ -40,31 +41,35 @@ const UserDashboard = () => {
       <div className="container-fluid header">
         <div className="text-center U-header">
           <h1 className="display-4 pt-3 "> شاهد الفيديوهات الخاصة بك</h1>
-          <button onClick={() => setRender("app rendered")}>
-            render state
-          </button>
         </div>
       </div>
 
       {auth.isAuthenticated ? (
         <div className="u-body">
           {video.length ? (
-            <div>
+            <div className="row">
               {video.map((userVideo) => {
                 return (
-                  <div className="card" key={userVideo._id}>
-                    <div className="card-header">اسم الباب</div>
-                    <div className="card-body video-body">
-                      <h5 className="card-title">{userVideo.subName} </h5>
-                      <p className="card-text">تفاصيل الفيديو</p>
-                      <span className="">السعر</span>
-                      <p className="card-text">400جنيه</p>
-                      <Link
-                        to={`/subjects-details?id=${userVideo.link}`}
-                        className="btn btn-primary"
-                      >
-                        شاهد الفيديو
-                      </Link>
+                  <div
+                    className="col-lg-4 col-md-5 col-sm-12"
+                    key={userVideo._id}
+                  >
+                    <div className="card">
+                      <div className="card-header">
+                        {userVideo.subject} {" المادة"} {userVideo.chapter}
+                      </div>
+                      <div className="card-body video-body">
+                        <h5 className="card-title">{userVideo.subName} </h5>
+                        <p className="card-text">{userVideo.details}</p>
+                        <span className="">السعر</span>
+                        <p className="card-text"> {userVideo.price}جنيه</p>
+                        <Link
+                          to={`/subjects-details?id=${userVideo.link}`}
+                          className="btn btn-primary"
+                        >
+                          شاهد الفيديو
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 );
