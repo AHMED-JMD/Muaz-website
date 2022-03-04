@@ -1,14 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 export default function SearchResult() {
   const [video, setVideo] = useState(null);
+  let [searchParams, setSearchPrams] = useSearchParams();
+
+  let subName = searchParams.get("subName");
+  console.log(subName);
+
+  useEffect(() => {
+    let data = { subName };
+    axios
+      .post("/v1/vedios/searched-video", data)
+      .then((res) => {
+        console.log(res);
+        setVideo(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="search-result">
       <div className="result">
         {video ? (
-          video.subName
+          <h1 className="display-5 h1-result pt-5">{video.subName}</h1>
         ) : (
-          <h1 className="display-6 h1-result pt-5">
+          <h1 className="display-5 h1-result pt-5">
             {" "}
             <div>404</div>
             عفوا لم يتم ايجاد ما تبحث عنه الرجاء المحاولة مجددا{" "}
@@ -16,7 +33,7 @@ export default function SearchResult() {
         )}
       </div>
 
-      <div className="result-body mt-8">
+      <div className="result-body mt-5">
         {video ? (
           <div className="card">
             <div className="card-header">

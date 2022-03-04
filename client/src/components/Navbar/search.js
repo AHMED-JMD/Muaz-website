@@ -1,74 +1,52 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./dropdown.css";
-import { v4 as uuidv4 } from "uuid";
+import Select from "react-dropdown-select";
+import { Link, useNavigate } from "react-router-dom";
 
 const Search = () => {
-  let [allData, setAllData] = useState([]);
+  let navigate = useNavigate();
+
   let [filterData, setFilterData] = useState([]);
-  let [open, setOpen] = useState(false);
   let [selVal, setSelVal] = useState(null);
-  let [query, setQuery] = useState("");
-  console.log(allData);
   console.log(filterData);
+  console.log(selVal);
 
   useEffect(() => {
     axios
       .get("/v1/vedios/all-videos")
       .then((res) => {
-        setAllData(res.data);
+        console.log(res.data);
         setFilterData(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const handleChange = (e) => {
-    let value = e.target.value.toLowerCase();
-    if (!value) return;
-    setOpen(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const filter = new RegExp(`(${value})\w+`);
-    console.log(filter);
-    console.log(
-      ["ahmed", "ali", "mohamed"].filter((data) => {
-        console.log(filter.test(data));
-      })
-    );
+    if (selVal !== null) {
+      return (
+        <link
+          to={navigate(
+            `/search-result?subName=${selVal.map((selVal1) => selVal1.label)}`
+          )}
+        ></link>
+      );
+    }
   };
-  return (
-    <form className="d-flex">
-      <div className="dropdown">
-        <div className="control">
-          <div className="selected-value">
-            <input
-              type="text"
-              onChange={handleChange}
-              placeholder={selVal ? selVal : "ابحث باسم المادة"}
-              onClick={() => setOpen((prev) => !prev)}
-            />
-          </div>
-          <div className={`arrow ${open ? "open" : null}`} />
-        </div>
-        <div className={`options ${open ? "open" : null}`}>
-          {filterData.map((data) => {
-            return (
-              <div
-                className={`option ${
-                  selVal === data.subName ? "selected" : null
-                }`}
-                key={uuidv4()}
-                onClick={() => {
-                  setSelVal(data.subName);
-                  setOpen(false);
-                }}
-              >
-                {data.subName}
-              </div>
-            );
-          })}
-        </div>
-      </div>
 
+  return (
+    <form className="d-flex" onSubmit={handleSubmit}>
+      <Select
+        isSearchable
+        options={filterData}
+        className="react-select"
+        placeholder="ابحث باسم المادة"
+        onChange={(values) => {
+          setSelVal(values);
+        }}
+      />
       <button className="btn btn0 btn-secondary" type="submit">
         ادخل
       </button>

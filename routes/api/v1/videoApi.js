@@ -28,7 +28,7 @@ router.get("/all-videos", (req, res) => {
     .then((video) => {
       Promise.all(
         video.map((video1) => {
-          return { subName: video1.subName };
+          return { label: video1.subName, value: video1._id };
         })
       ).then((result) => {
         res.json(result);
@@ -58,8 +58,11 @@ router.post("/", (req, res) => {
 
 //public route
 //search for specific video
-router.get("/searched-video", (req, res) => {
+router.post("/searched-video", (req, res) => {
   const { subName } = req.body;
+  if (!subName) {
+    return res.status(400).json("please enter subject name");
+  }
 
   Vedios.findOne({ subName })
     .then((video) => {
