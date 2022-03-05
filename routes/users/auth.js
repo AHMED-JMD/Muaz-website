@@ -36,7 +36,7 @@ router.post("/", (req, res) => {
               token,
               user: {
                 id: user.id,
-                name: user.name,
+                phoneNum: user.phoneNum,
                 username: user.username,
                 role: user.role,
                 videosId: user.videosId,

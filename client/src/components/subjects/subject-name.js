@@ -14,7 +14,6 @@ const SubjectsName = () => {
   let chapter = searchParams.get("chapter");
 
   const [video, setVideo] = useState([]);
-  console.log(video);
 
   //function to delete video
   const deletVideo = (videoId) => {
@@ -31,7 +30,7 @@ const SubjectsName = () => {
     let data = { videoId };
     axios
       .post("/v1/vedios/delete-video", data, config)
-      .then((res) => setDatdeleted((prev) => !prev))
+      .then((res) => setDatdeleted(!datdeleted))
       .catch((err) => setErr(err.response.data));
   };
   //function to order videos
@@ -90,7 +89,11 @@ const SubjectsName = () => {
       <div className=" cont10">
         <div className="row">
           {ordered ? (
-            <h4 className="alert alert-success back-message ">
+            <h4
+              className={` alert alert-success back-message ${
+                ordered ? "back-message-anim" : null
+              }`}
+            >
               تم طلب الفيديو بنجاح الرجاء التواصل عن طريق االايميل او الهاتف
               الموجودة على الصفحة الرئيسية{" "}
             </h4>
@@ -101,7 +104,7 @@ const SubjectsName = () => {
                 <div className="col-lg-4 col-md-5 col-sm-12" key={video1._id}>
                   <div className="card">
                     <div className="card-header">
-                      {video1.subject} {" المادة"} {video1.chapter}
+                      {video1.subject} {" باب"} {video1.chapter}
                     </div>
                     <div className="card-body video-body">
                       <h5 className="card-title">{video1.subName}</h5>

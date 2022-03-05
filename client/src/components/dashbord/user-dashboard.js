@@ -56,7 +56,7 @@ const UserDashboard = () => {
                   >
                     <div className="card">
                       <div className="card-header">
-                        {userVideo.subject} {" المادة"} {userVideo.chapter}
+                        {userVideo.subject} {" باب"} {userVideo.chapter}
                       </div>
                       <div className="card-body video-body">
                         <h5 className="card-title">{userVideo.subName} </h5>
@@ -64,7 +64,7 @@ const UserDashboard = () => {
                         <span className="">السعر</span>
                         <p className="card-text"> {userVideo.price}جنيه</p>
                         <Link
-                          to={`/subjects-details?id=${userVideo.link}`}
+                          to={`/subjects-details?id=${userVideo._id}`}
                           className="btn btn-primary"
                         >
                           شاهد الفيديو

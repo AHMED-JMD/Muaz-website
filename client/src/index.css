@@ -390,10 +390,9 @@ nav {
   padding: 40px;
   color: rgb(36, 33, 33);
   border-radius: 20px;
-  animation: message-fade 7s ease-in-out forwards;
 }
 .back-message-anim {
-  animation: message-fade 16s ease-in-out forwards;
+  animation: message-fade 7s ease-in-out forwards;
 }
 @keyframes message-fade {
   from {
@@ -521,7 +520,7 @@ footer {
   .cont1 {
     height: 450px;
   }
-  .cont5 video {
+  .cont9 video {
     max-width: 500px !important;
     height: 430px !important;
   }
@@ -578,7 +577,7 @@ footer {
   .card {
     width: 360px;
   }
-  .cont5 video {
+  .cont9 video {
     max-width: 420px !important;
     height: 400px !important;
   }
@@ -587,6 +586,10 @@ footer {
 @media only screen and (max-width: 480px) {
   .card {
     width: 300px;
+  }
+  .cont9 video {
+    max-width: 350px !important;
+    height: 300px !important;
   }
   .img2 img {
     width: 300px !important;
@@ -615,5 +618,9 @@ footer {
   }
   .btn2 {
     width: 100%;
+  }
+  .cont9 video {
+    max-width: 260px !important;
+    height: 210px !important;
   }
 }

@@ -55,6 +55,8 @@ const SubjectsDetails = () => {
                 height="500"
                 controls
                 controlsList="nodownload"
+                id="videoTag"
+                onContextMenu={(e) => e.preventDefault()}
               >
                 <source
                   src={`/v1/vedios/stream-vedio?link=${video.link}`}

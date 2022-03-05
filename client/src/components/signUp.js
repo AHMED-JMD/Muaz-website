@@ -9,7 +9,7 @@ const SignUp = () => {
   const { err, GetErrors, ClearErrors } = useContext(ErrContext);
 
   //state to manage form
-  let [name, setName] = useState("");
+  let [phoneNum, setPhoneNum] = useState("");
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
   let [confirmPas, setConfirmPas] = useState("");
@@ -22,7 +22,7 @@ const SignUp = () => {
         "content-type": "application/json",
       },
     };
-    let newUser = { name, username, password, confirmPas };
+    let newUser = { phoneNum, username, password, confirmPas };
     const body = JSON.stringify(newUser);
     //axios to db
     axios
@@ -52,13 +52,13 @@ const SignUp = () => {
             ) : null}
             <h1 className="display-5 text-center"> تسجيل جديد </h1>
             <div className="form-group">
-              <label className="label">الاسم</label>
+              <label className="label">رقم الهاتف</label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                placeholder="ادخل الاسم"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="ادخل رقم الهاتف"
+                value={phoneNum}
+                onChange={(e) => setPhoneNum(e.target.value)}
               />
             </div>{" "}
             <br />

@@ -14,7 +14,6 @@ export default function SearchResult() {
     axios
       .post("/v1/vedios/searched-video", data)
       .then((res) => {
-        console.log(res);
         setVideo(res.data);
       })
       .catch((err) => console.log(err));
@@ -37,7 +36,7 @@ export default function SearchResult() {
         {video ? (
           <div className="card">
             <div className="card-header">
-              {video.subject} {" المادة"} {video.chapter}
+              {video.subject} {" باب"} {video.chapter}
             </div>
             <div className="card-body video-body">
               <h5 className="card-title">{video.subName}</h5>

@@ -7,7 +7,6 @@ import ArtBook from "./artBook";
 
 const Subjects = () => {
   const { auth } = useContext(AuthContext);
-  console.log(auth);
   return (
     <div className="homepage">
       {/* <!--header--> */}
@@ -20,7 +19,7 @@ const Subjects = () => {
               الرئيسية
             </Link>{" "}
             /{" "}
-            <Link className="sub-H" to="/subject">
+            <Link className="sub-H" to="/subjects">
               المواد
             </Link>
           </p>

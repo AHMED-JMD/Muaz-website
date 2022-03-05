@@ -8,6 +8,7 @@ const AdminDashboard = () => {
   const { AddVideo, video } = useContext(VideoContext);
   const [order, setOrder] = useState([]);
   const [isArrived, setIsArrived] = useState(false);
+  const [postSuc, setPostSuc] = useState(false);
 
   let [deleted, setDeleted] = useState(false);
   let [permGranted, setPermGranted] = useState(false);
@@ -20,6 +21,8 @@ const AdminDashboard = () => {
   const [subName, setSubName] = useState("");
   const [price, setPrice] = useState("");
   const [details, setDetails] = useState("");
+
+  //define classList when db success
 
   //function to get orders
   useEffect(() => {
@@ -38,7 +41,7 @@ const AdminDashboard = () => {
       setOrder(res.data);
       setIsArrived(true);
     });
-  }, [deleted]);
+  }, [deleted, permGranted]);
 
   //function to give access
   const giveAccess = (userId, videoId) => {
@@ -77,6 +80,7 @@ const AdminDashboard = () => {
       .catch((err) => console.log(err));
   };
 
+  //handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -104,6 +108,7 @@ const AdminDashboard = () => {
       .post("/v1/vedios/post-video", data, config)
       .then((res) => {
         AddVideo(res.data);
+        setPostSuc(true);
       })
       .catch((err) => console.log(err));
   };
@@ -122,7 +127,11 @@ const AdminDashboard = () => {
               <h1 className="text-center">اضف فيديو جديد</h1>
 
               {video.isArrived ? (
-                <div className="alert alert-success back-message " id="hidden">
+                <div
+                  className={`alert alert-success back-message ${
+                    postSuc ? "back-message-anim " : null
+                  }`}
+                >
                   تم اضافة الفيديو بنجاح
                 </div>
               ) : null}
@@ -220,6 +229,18 @@ const AdminDashboard = () => {
                       <option value="الدوال">الدوال </option>
                       <option value="تطبيقات التفاضل">تطبيقات التفاضل </option>
                     </optgroup>
+
+                    <optgroup label="الكتاب الادبي">
+                      <option value=" الدوال الحقيقية والنهايات">
+                        {" "}
+                        الدوال الحقيقية والنهايات{" "}
+                      </option>
+                      <option value="التفاضل">التفاضل </option>
+                      <option value="التكامل">التكامل </option>
+                      <option value="الاحصاء">الاحصاء </option>
+                      <option value="الاحتمالات">الاحتمالات </option>
+                      <option value=" المصفوفات"> المصفوفات </option>
+                    </optgroup>
                   </select>
                 </div>
                 <div className="form-group">
@@ -271,7 +292,11 @@ const AdminDashboard = () => {
             {isArrived ? (
               <div className="col-lg-8 col-md-7 col-sm-12 order">
                 {permGranted ? (
-                  <div className="alert alert-success back-message">
+                  <div
+                    className={`alert alert-success back-message ${
+                      permGranted ? "back-message-anim" : null
+                    }`}
+                  >
                     تم اعطاء الاذن بنجاح الرجاء التواصل مع الطالب المعني
                   </div>
                 ) : null}
@@ -280,7 +305,9 @@ const AdminDashboard = () => {
                   {order.map((order1) => {
                     return (
                       <li className="list-group-item l1" key={order1._id}>
-                        <p>{order1.username}</p>
+                        <p>
+                          {order1.username} {order1.phoneNum}
+                        </p>
                         <p>
                           <span>اسم الدرس {order1.videoname}</span>{" "}
                           <span>السعر {order1.price}جنيه</span>

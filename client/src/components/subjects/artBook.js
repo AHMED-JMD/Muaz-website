@@ -1,60 +1,134 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const ArtBook = () => {
-  const [art, setArt] = useState([]);
-  // console.log(art)
-
-  // useEffect(() =>{
-  //   const config = {
-  //       headers:{
-  //           "Content-Type": "application/json",
-  //           "kind" : "art",
-  //           "booknum" : "art-book"
-  //       }
-  //   }
-
-  //   //post to database
-  // //   axios.get('/v1/vedios', config)
-  // //    .then(res =>{
-  // //       setArt(res.data.videos);
-  // //    }).catch(err => console.log(err))
-  // }, []);
-
-  return art.length ? (
-    <div className="row card-wrapper">
+  return (
+    <div className="row">
       {/* <!--card1--> */}
-      {art.map((art1) => {
-        return (
-          <div className="col-lg-4 col-md-6 col-sm-12 " key={art1._id}>
-            <div className="card">
-              <Link to="/subjects-name">
-                <img
-                  src="./images/4-rm.png"
-                  className="card-img-top"
-                  alt="..."
-                />
-              </Link>
-              <div className="card-body">
-                <h5 className="card-title">{art1.chapter}</h5>
-                <p>{art1.price}</p>
-                <Link
-                  to="/subjects-name?subName=less1&kind=ki1"
-                  className="btn btn8"
-                >
-                  التفاصيل
-                </Link>
-              </div>
-            </div>
+      <div className="col-lg-4 col-md-6 col-sm-12 ">
+        <div className="card">
+          <Link to="/subjects-name?kind=أدبي&chapter=الدوال الحقيقة والنهايات">
+            <img src="./images/4-rm.png" className="card-img-top" alt="..." />
+          </Link>
+          <div className="card-body">
+            <h5 className="card-title">
+              <p> باب الدوال الحقيقية والنهايات</p>
+            </h5>
+            <Link
+              to="/subjects-name?kind=أدبي&chapter=الدوال الحقيقية والنهايات"
+              className="btn btn8"
+            >
+              التفاصيل
+            </Link>
           </div>
-        );
-      })}
-
+        </div>
+      </div>
       {/* <!--ends here--> */}
-    </div>
-  ) : (
-    <div className="alert alert-success">
-      ليس هناك فيديوهات الان انتظر قليلا
+
+      {/* <!--card2--> */}
+      <div className="col-lg-4 col-md-6 col-sm-12 ">
+        <div className="card">
+          <Link to="/subjects-name?kind=أدبي&chapter=التفاضل">
+            <img src="./images/4-rm.png" className="card-img-top" alt="..." />
+          </Link>
+          <div className="card-body">
+            <h5 className="card-title">
+              <p> باب التفاضل</p>
+            </h5>
+            <Link
+              to="/subjects-name?kind=أدبي&chapter=التفاضل"
+              className="btn btn8"
+            >
+              التفاصيل
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* <!--ends here--> */}
+
+      {/* <!--card3--> */}
+      <div className="col-lg-4 col-md-6 col-sm-12 ">
+        <div className="card">
+          <Link to="/subjects-name?kind=أدبي&chapter=التكامل">
+            <img src="./images/4-rm.png" className="card-img-top" alt="..." />
+          </Link>
+          <div className="card-body">
+            <h5 className="card-title">
+              <p> باب التكامل</p>
+            </h5>
+            <Link
+              to="/subjects-name?kind=أدبي&chapter=التكامل"
+              className="btn btn8"
+            >
+              التفاصيل
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* <!--ends here--> */}
+
+      {/* <!--card4--> */}
+      <div className="col-lg-4 col-md-6 col-sm-12 ">
+        <div className="card">
+          <Link to="/subjects-name?kind=أدبي&chapter=الاحصاء">
+            <img src="./images/4-rm.png" className="card-img-top" alt="..." />
+          </Link>
+          <div className="card-body">
+            <h5 className="card-title">
+              <p> باب الاحصاء</p>
+            </h5>
+            <Link
+              to="/subjects-name?kind=أدبي&chapter=الاحصاء"
+              className="btn btn8"
+            >
+              التفاصيل
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* <!--ends here--> */}
+
+      {/* <!--card5--> */}
+      <div className="col-lg-4 col-md-6 col-sm-12 ">
+        <div className="card">
+          <Link to="/subjects-name?kind=أدبي&chapter=الاحتمالات">
+            <img src="./images/4-rm.png" className="card-img-top" alt="..." />
+          </Link>
+          <div className="card-body">
+            <h5 className="card-title">
+              <p> باب الاحتمالات</p>
+            </h5>
+            <Link
+              to="/subjects-name?kind=أدبي&chapter=الاحتمالات"
+              className="btn btn8"
+            >
+              التفاصيل
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* <!--ends here--> */}
+
+      {/* <!--card1--> */}
+      <div className="col-lg-4 col-md-6 col-sm-12 ">
+        <div className="card">
+          <Link to="/subjects-name?kind=أدبي&chapter=المصفوفات">
+            <img src="./images/4-rm.png" className="card-img-top" alt="..." />
+          </Link>
+          <div className="card-body">
+            <h5 className="card-title">
+              <p> باب المصفوفات</p>
+            </h5>
+            <Link
+              to="/subjects-name?kind=أدبي&chapter=المصفوفات"
+              className="btn btn8"
+            >
+              التفاصيل
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* <!--ends here--> */}
     </div>
   );
 };

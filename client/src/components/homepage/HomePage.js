@@ -6,8 +6,6 @@ import { AuthContext } from "../../context/users/authContext";
 const HomePage = () => {
   const { auth } = useContext(AuthContext);
 
-  console.log(auth);
-
   return (
     <div className="homepage">
       {/* <!--header starts here-->     */}
@@ -19,8 +17,8 @@ const HomePage = () => {
                 <div className="header-text">
                   <h1 className="display-5">
                     {" "}
-                    منصة <span className="h1-txt">معاذ</span> لتعليم رياضيات
-                    الصف الثالث
+                    منصة استاذ <span className="h1-txt">معاذ</span> لتعليم
+                    رياضيات الصف الثالث
                   </h1>
                   <h4 className="sub-header-txt">
                     {" "}

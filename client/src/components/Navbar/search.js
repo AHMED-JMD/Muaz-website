@@ -2,21 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./dropdown.css";
 import Select from "react-dropdown-select";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   let navigate = useNavigate();
 
   let [filterData, setFilterData] = useState([]);
   let [selVal, setSelVal] = useState(null);
-  console.log(filterData);
-  console.log(selVal);
 
   useEffect(() => {
     axios
       .get("/v1/vedios/all-videos")
       .then((res) => {
-        console.log(res.data);
         setFilterData(res.data);
       })
       .catch((err) => console.log(err));
@@ -26,12 +23,8 @@ const Search = () => {
     e.preventDefault();
 
     if (selVal !== null) {
-      return (
-        <link
-          to={navigate(
-            `/search-result?subName=${selVal.map((selVal1) => selVal1.label)}`
-          )}
-        ></link>
+      navigate(
+        `/search-result?subName=${selVal.map((selVal1) => selVal1.label)}`
       );
     }
   };

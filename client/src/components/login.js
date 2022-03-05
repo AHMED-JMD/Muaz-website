@@ -55,11 +55,11 @@ const Login = () => {
               </div>
             ) : null}
             <div className="form-group">
-              <label className="label">الاسم</label>
+              <label className="label">اسم المستخدم </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="ادخل الاسم"
+                placeholder="ادخل اسم المستخدم"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -78,7 +78,7 @@ const Login = () => {
             <br />
             <div className="text-center">
               <p>OR</p>
-              <button className="btn btn7 ">
+              {/* <button className="btn btn7 ">
                 {" "}
                 <img
                   src="./images/facebok-logo.png"
@@ -86,8 +86,8 @@ const Login = () => {
                   alt="facebok-logo"
                 />{" "}
                 سجل عن طريق فيسبوك{" "}
-              </button>
-              <br /> <br />
+              </button> */}
+              {/* <br /> <br /> */}
               <p>
                 ليس لديك حساب ؟ <a href="/signup">سجل الان</a>
               </p>

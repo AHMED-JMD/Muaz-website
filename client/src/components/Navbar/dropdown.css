@@ -8,3 +8,45 @@
 .inside-select {
   color: black !important;
 }
+@media only screen and (max-width: 990px) {
+  .react-select {
+    width: 700px !important;
+    margin-right: 20px !important;
+  }
+}
+@media only screen and (max-width: 813px) {
+  .react-select {
+    width: 600px !important;
+    margin-right: 20px !important;
+  }
+}
+@media only screen and (max-width: 710px) {
+  .react-select {
+    width: 500px !important;
+    margin-right: 10px !important;
+  }
+}
+@media only screen and (max-width: 605px) {
+  .react-select {
+    width: 400px !important;
+    margin-right: 10px !important;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .react-select {
+    width: 300px !important;
+    margin-right: 10px !important;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .react-select {
+    width: 200px !important;
+    margin-right: 20px !important;
+  }
+}
+@media only screen and (max-width: 300px) {
+  .react-select {
+    width: 150px !important;
+    margin-right: 10px !important;
+  }
+}

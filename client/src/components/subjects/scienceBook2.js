@@ -2,29 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ScienceBook2 = () => {
-  //   const [scienceB2, setScienceB2] = useState([])
-  //   const [videoId, setVideoId] = useState(0);
-  //   console.log(scienceB2)
-
-  //   useEffect(() =>{
-  //     const config = {
-  //         headers:{
-  //             "Content-Type": "application/json",
-  //             "kind" : "science",
-  //             "booknum" : "second-book"
-  //         }
-  //     }
-
-  //     // //post to database
-  //     // axios.get('/v1/vedios', config)
-  //     //  .then(res =>{
-  //     //     setScienceB2(res.data.videos);
-  //     //  }).catch(err => console.log(err))
-  //   }, []);
-
   return (
     <div className="row ">
-      <h2>الكتاب الثاني</h2>
+      <h2 className="text-center mb-4">الكتاب الثاني</h2>
       {/* <!--card1--> */}
       <div className="col-lg-4 col-md-6 col-sm-12 ">
         <div className="card">

@@ -42,13 +42,15 @@ router.get("/all-videos", (req, res) => {
 router.post("/", (req, res) => {
   let { kind, chapter } = req.body;
 
+  console.log(kind, chapter);
+
   if (!kind || !chapter) {
     return res.status(400).json({ msg: "please set headers" });
   }
 
   Vedios.find({ kind, chapter })
     .then((videos) => {
-      if (!videos) {
+      if (videos === []) {
         console.log("couldnt fetch from db for some reasons");
       }
       res.json({ videos });
@@ -81,7 +83,6 @@ router.post(
   (req, res, next) => {
     let { subject, kind, booknum, chapter, subName, price, details } = req.body;
     let { filename } = req.file;
-    console.log(details);
     //filter input
     subject = xssFilter.inHTMLData(subject);
     kind = xssFilter.inHTMLData(kind);
