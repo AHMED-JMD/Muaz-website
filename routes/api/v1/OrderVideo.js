@@ -49,6 +49,7 @@ router.post("/", async (req, res) => {
 
     let newRequest = new Request({
       username,
+      phoneNum: user.phoneNum,
       videoname,
       price,
       userId: user.id,
@@ -59,6 +60,44 @@ router.post("/", async (req, res) => {
     return res.json(request);
   } catch (error) {
     console.log(err);
+  }
+});
+
+//function to order a whole chapter
+router.post("/multi-order", async (req, res) => {
+  try {
+    const { kind, chapter, price, userId } = req.body;
+    console.log(kind, chapter, price, userId);
+    if (!kind || !chapter || !userId || !price) {
+      return res.status(400).json("please provide all requirments");
+    }
+
+    const user = await Users.findById(userId);
+    let username = user.username;
+
+    const videos = await Vedios.find({ kind, chapter });
+    let videoname = chapter;
+
+    let videoIds = [];
+    videos.map((video) => {
+      videoIds.push(video._id);
+    });
+    console.log(videoIds);
+
+    let newRequest = new Request({
+      username,
+      phoneNum: user.phoneNum,
+      videoname,
+      price,
+      videoId: videoIds,
+      userId: user.id,
+    });
+
+    const request = await newRequest.save();
+    console.log(request);
+    return res.json(request);
+  } catch (e) {
+    console.log(e);
   }
 });
 
@@ -84,18 +123,21 @@ router.post("/give-access", (req, res) => {
         })
         .catch((err) => console.log(err));
       //update videos
-      Vedios.findById(videoId)
-        .then((video) => {
-          newUserId = video.users.push(userId);
-          console.log(newUserId);
+      videoId.map((video) => {
+        Vedios.findById(video)
+          .then((video1) => {
+            newUserId = video1.users.push(userId);
+            console.log(newUserId);
 
-          Vedios.findByIdAndUpdate(videoId, { users: video.users })
-            .then((newvideo) => {
-              console.log(newvideo);
-            })
-            .catch((err) => console.log(err));
-        })
-        .catch((err) => console.log(err));
+            Vedios.findByIdAndUpdate(video, { users: video1.users })
+              .then((newvideo) => {
+                console.log(newvideo);
+              })
+              .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+      });
+
       //returning user
       res.json(user);
     })

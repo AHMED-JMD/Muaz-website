@@ -5,6 +5,10 @@ const RequestSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  phoneNum: {
+    type: Number,
+    required: true,
+  },
   videoname: {
     type: String,
     required: true,
@@ -14,8 +18,9 @@ const RequestSchema = mongoose.Schema({
     required: true,
   },
   videoId: {
-    type: String,
+    type: Array,
     required: true,
+    default: [],
   },
   userId: {
     type: String,

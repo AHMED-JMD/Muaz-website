@@ -13,13 +13,14 @@ const ArtBook = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب الدوال الحقيقية والنهايات</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=أدبي&chapter=الدوال الحقيقية والنهايات"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -34,13 +35,14 @@ const ArtBook = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب التفاضل</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=أدبي&chapter=التفاضل"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -55,13 +57,14 @@ const ArtBook = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب التكامل</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=أدبي&chapter=التكامل"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -76,13 +79,14 @@ const ArtBook = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب الاحصاء</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=أدبي&chapter=الاحصاء"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -97,13 +101,14 @@ const ArtBook = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب الاحتمالات</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=أدبي&chapter=الاحتمالات"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -118,13 +123,14 @@ const ArtBook = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب المصفوفات</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=أدبي&chapter=المصفوفات"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>

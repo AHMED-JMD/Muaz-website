@@ -14,6 +14,7 @@ const ScienceBook2 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب الاعداد المركبة</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=الاعداد المركبة"
@@ -34,13 +35,14 @@ const ScienceBook2 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب التفاضل</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=التفاضل"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -54,13 +56,14 @@ const ScienceBook2 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب التكامل</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=التكامل"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -74,13 +77,14 @@ const ScienceBook2 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب الدائرة</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=الدائرة"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -94,13 +98,14 @@ const ScienceBook2 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب الدوال</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=الدوال"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>
@@ -114,13 +119,14 @@ const ScienceBook2 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب تطبيقات التفاضل</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=تطبيقات التفاضل"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>

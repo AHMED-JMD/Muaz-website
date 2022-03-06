@@ -13,7 +13,7 @@ const ScienceBook1 = () => {
           </Link>
           <div className="card-body">
             <h5 className="card-title">
-              <p> باب الاحتمالات</p>
+              <p> باب الاحتمالات</p> <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=الاحتمالات"
@@ -33,7 +33,7 @@ const ScienceBook1 = () => {
           </Link>
           <div className="card-body">
             <h5 className="card-title">
-              <p> باب الاحصاء</p>
+              <p> باب الاحصاء</p> <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=الاحصاء"
@@ -54,6 +54,7 @@ const ScienceBook1 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب الكسور</p>
+              <span className="mb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=الكسور"
@@ -74,6 +75,7 @@ const ScienceBook1 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب المصفوفات</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=المصفوفات"
@@ -94,13 +96,14 @@ const ScienceBook1 = () => {
           <div className="card-body">
             <h5 className="card-title">
               <p> باب مبدأ العد</p>
+              <span className="pb-5">4000 جنيه</span>
             </h5>
             <Link
               to="/subjects-name?kind=علمي&chapter=مبدأ العد"
               className="btn btn8"
             >
               التفاصيل
-            </Link>
+            </Link>{" "}
           </div>
         </div>
       </div>

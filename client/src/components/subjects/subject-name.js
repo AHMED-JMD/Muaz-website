@@ -36,7 +36,7 @@ const SubjectsName = () => {
   //function to order videos
   const OrderVideo = (videoId, userId) => {
     let data = { videoId, userId };
-
+    console.log(data);
     axios
       .post("/v1/orders/", data)
       .then((res) => {
@@ -49,6 +49,20 @@ const SubjectsName = () => {
       });
   };
 
+  //function to order multiple videos
+  const orderChapter = (kind, chapter, price, userId) => {
+    let data = { kind, chapter, price, userId };
+    console.log(data);
+    axios
+      .post("/v1/orders/multi-order", data)
+      .then((res) => {
+        console.log(res);
+        setOrdered(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     const config = {
       headers: {
@@ -98,6 +112,21 @@ const SubjectsName = () => {
               الموجودة على الصفحة الرئيسية{" "}
             </h4>
           ) : null}
+          {auth.isAuthenticated ? (
+            auth.user.role === "basic" ? (
+              video.length ? (
+                <button
+                  className="btn btn-primary order-all-btn"
+                  onClick={() =>
+                    orderChapter(kind, chapter, 4000, auth.user._id)
+                  }
+                >
+                  اطلب الباب
+                </button>
+              ) : null
+            ) : null
+          ) : null}
+
           {video.length ? (
             video.map((video1) => {
               return (

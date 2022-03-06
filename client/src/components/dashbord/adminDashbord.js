@@ -306,10 +306,11 @@ const AdminDashboard = () => {
                     return (
                       <li className="list-group-item l1" key={order1._id}>
                         <p>
-                          {order1.username} {order1.phoneNum}
+                          {order1.username}
+                          {" الهاتف "} {order1.phoneNum}
                         </p>
                         <p>
-                          <span>اسم الدرس {order1.videoname}</span>{" "}
+                          <p>اسم الدرس {order1.videoname}</p>{" "}
                           <span>السعر {order1.price}جنيه</span>
                         </p>
                         <button

@@ -11,7 +11,7 @@
 @media only screen and (max-width: 990px) {
   .react-select {
     width: 700px !important;
-    margin-right: 20px !important;
+    margin-right: 60px !important;
   }
 }
 @media only screen and (max-width: 813px) {
@@ -40,8 +40,8 @@
 }
 @media only screen and (max-width: 400px) {
   .react-select {
-    width: 200px !important;
-    margin-right: 20px !important;
+    width: 260px !important;
+    margin-right: 5px !important;
   }
 }
 @media only screen and (max-width: 300px) {
